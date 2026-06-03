@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 import { AnimatedText } from "./animated-text"
 import { ArrowUpRight, ArrowRight } from "lucide-react"
 
-export function HeroSection() {
+export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false)
 
   // Animación de entrada inicial suave (nativa de la plantilla)

@@ -1,9 +1,9 @@
 "use client"
 
-import { MapPin, Mic, BrainCircuit, SlidersHorizontal } from "lucide-react"
+import { MapPin, Mic, BrainCircuit, SlidersHorizontal, Navigation } from "lucide-react"
 import { motion } from "framer-motion"
 
-export function FeaturesSection() {
+export default function FeaturesSection() {
   return (
     <section id="features" className="py-24 md:py-32 px-6 relative bg-[#F3F4F6]">
       <div className="max-w-6xl mx-auto relative z-10">
@@ -50,61 +50,92 @@ export function FeaturesSection() {
               </p>
             </div>
             
-            {/* Animación de Forma de Onda (Waveform) */}
-            <div className="mt-8 flex items-center gap-1.5 h-16 bg-[#F3F4F6] p-4 rounded-full w-fit border border-[#D1D5DB]/50 group-hover:bg-[#427AA1]/5 transition-colors">
-              <div className="w-8 h-8 bg-[#427AA1] rounded-full flex items-center justify-center mr-2">
+            {/* Animación de Forma de Onda (Waveform dinámica a color) */}
+            <div className="mt-8 flex items-center gap-1.5 h-16 bg-[#F3F4F6] p-4 rounded-full w-fit border border-[#D1D5DB]/50 group-hover:bg-[#427AA1]/5 transition-colors shadow-inner">
+              <div className="w-8 h-8 bg-[#427AA1] rounded-full flex items-center justify-center mr-2 shrink-0">
                 <div className="w-0 h-0 border-t-[5px] border-t-transparent border-l-[8px] border-l-white border-b-[5px] border-b-transparent ml-1" />
               </div>
               {[...Array(15)].map((_, i) => (
                 <motion.div
                   key={i}
-                  animate={{ height: ["20%", "100%", "20%"] }}
-                  transition={{
-                    repeat: Number.POSITIVE_INFINITY,
-                    duration: 1.2,
-                    delay: i * 0.08,
-                    ease: "easeInOut"
+                  animate={{ 
+                    height: ["20%", "100%", "20%"],
+                    backgroundColor: ["#00324D", "#ec4899", "#f97316", "#14b8a6", "#00324D"]
                   }}
-                  className="w-1.5 bg-[#00324D] rounded-full"
+                  transition={{
+                    height: {
+                      repeat: Number.POSITIVE_INFINITY,
+                      duration: 1.2,
+                      delay: i * 0.08,
+                      ease: "easeInOut"
+                    },
+                    backgroundColor: {
+                      repeat: Number.POSITIVE_INFINITY,
+                      duration: 4,
+                      delay: i * 0.1,
+                      ease: "linear"
+                    }
+                  }}
+                  className="w-1.5 rounded-full"
                 />
               ))}
               <span className="text-xs font-bold text-[#4C4B4B] ml-2">0:12</span>
             </div>
           </motion.div>
 
-          {/* BENTO ITEM 2: Hiper-Localización (Radar) */}
+          {/* BENTO ITEM 2: Hiper-Localización (Radar / Mapa Interactivo) */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-[#00324D] rounded-3xl p-8 shadow-2xl flex flex-col justify-between relative overflow-hidden group"
+            className="bg-[#00324D] rounded-3xl p-8 shadow-2xl flex flex-col justify-between relative overflow-hidden group min-h-[300px]"
           >
-            {/* Efecto Radar de Fondo */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 h-48 pointer-events-none">
-              <motion.div 
-                animate={{ scale: [1, 2.5], opacity: [0.5, 0] }}
-                transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2, ease: "easeOut" }}
-                className="absolute inset-0 bg-[#427AA1] rounded-full"
+            {/* Fondo Interactivo tipo Radar/Mapa */}
+            <div className="absolute inset-0 z-0 overflow-hidden">
+              {/* Grilla estilo mapa digital */}
+              <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:24px_24px]" />
+              
+              {/* Efecto de barrido de radar */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                className="absolute top-[40%] left-1/2 w-[500px] h-[500px] -ml-[250px] -mt-[250px] rounded-full opacity-30 pointer-events-none"
+                style={{
+                  background: "conic-gradient(from 0deg, transparent 70%, rgba(66, 122, 161, 0.2) 80%, rgba(66, 122, 161, 0.9) 100%)",
+                }}
               />
-              <motion.div 
-                animate={{ scale: [1, 2.5], opacity: [0.5, 0] }}
-                transition={{ repeat: Number.POSITIVE_INFINITY, duration: 2, delay: 1, ease: "easeOut" }}
-                className="absolute inset-0 bg-[#427AA1] rounded-full"
-              />
+
+              {/* Punto Interactivo 1: Nueva Córdoba */}
+              <div className="absolute top-[30%] left-[30%] group/pin cursor-pointer z-20">
+                <motion.div initial={{ scale: 0 }} whileInView={{ scale: 1 }} className="w-2.5 h-2.5 bg-red-400 rounded-full relative z-10" />
+                <motion.div animate={{ scale: [1, 3], opacity: [0.5, 0] }} transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }} className="absolute inset-0 bg-red-400 rounded-full" />
+                {/* Tooltip Hover */}
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-2 rounded-xl opacity-0 group-hover/pin:opacity-100 transition-all transform translate-y-2 group-hover/pin:translate-y-0 pointer-events-none shadow-xl w-max">
+                  <p className="text-white font-bold text-xs">Nueva Córdoba</p>
+                  <p className="text-white/70 text-[10px] flex items-center gap-1 mt-1"><Navigation className="w-3 h-3" /> Envío: $1.500</p>
+                </div>
+              </div>
+
+              {/* Punto Interactivo 2: Cerro */}
+              <div className="absolute top-[60%] left-[65%] group/pin cursor-pointer z-20">
+                <motion.div initial={{ scale: 0 }} whileInView={{ scale: 1 }} className="w-2.5 h-2.5 bg-teal-400 rounded-full relative z-10" />
+                <motion.div animate={{ scale: [1, 3], opacity: [0.5, 0] }} transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 1 }} className="absolute inset-0 bg-teal-400 rounded-full" />
+                {/* Tooltip Hover */}
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-2 rounded-xl opacity-0 group-hover/pin:opacity-100 transition-all transform translate-y-2 group-hover/pin:translate-y-0 pointer-events-none shadow-xl w-max">
+                  <p className="text-white font-bold text-xs">Cerro de las Rosas</p>
+                  <p className="text-white/70 text-[10px] flex items-center gap-1 mt-1"><Navigation className="w-3 h-3" /> Envío: $2.500</p>
+                </div>
+              </div>
+
+              {/* Degradado para integrar con el texto inferior */}
+              <div className="absolute inset-0 bg-gradient-to-t from-[#00324D] via-[#00324D]/40 to-transparent pointer-events-none" />
             </div>
 
-            <div className="relative z-10 text-center flex flex-col items-center mt-4">
-              <div className="bg-white p-3 rounded-full mb-4 shadow-lg relative">
-                <MapPin className="w-6 h-6 text-[#00324D]" />
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full border-2 border-white" />
+            <div className="relative z-10 pointer-events-none h-full flex flex-col justify-end">
+              <div className="bg-white/10 backdrop-blur-md p-3 rounded-2xl mb-4 shadow-lg w-fit border border-white/20">
+                <MapPin className="w-6 h-6 text-white" />
               </div>
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 text-white text-xs font-mono px-3 py-1 rounded-full mb-8">
-                Target: Nueva Córdoba
-              </div>
-            </div>
-
-            <div className="relative z-10">
               <h3 className="text-xl font-bold text-white mb-2">Logística Barrial</h3>
               <p className="text-white/70 text-sm font-medium">
                 Calcula envíos exactos en milisegundos reconociendo barrios, zonas y cadeterías locales.
@@ -112,7 +143,7 @@ export function FeaturesSection() {
             </div>
           </motion.div>
 
-          {/* BENTO ITEM 3: Adaptación de Tono */}
+          {/* BENTO ITEM 3: Adaptación de Tono (CAMALEÓN SEMÁNTICO) */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -130,18 +161,24 @@ export function FeaturesSection() {
               </p>
             </div>
 
-            {/* Micro-interacción de Slider */}
+            {/* Micro-interacción de Slider que cambia de color dinámicamente */}
             <div className="space-y-4 bg-[#F3F4F6] p-4 rounded-2xl border border-[#D1D5DB]/50">
               <div className="flex justify-between text-xs font-bold text-[#4C4B4B]">
                 <span>Rígido</span>
-                <span className="text-[#427AA1]">Empático</span>
+                <span className="text-[#EAB308]">Empático</span>
               </div>
               <div className="h-2 w-full bg-[#D1D5DB] rounded-full overflow-hidden">
                 <motion.div 
-                  initial={{ width: "20%" }}
-                  whileInView={{ width: "85%" }}
-                  transition={{ duration: 1.5, delay: 0.5, ease: "easeOut" }}
-                  className="h-full bg-[#427AA1] rounded-full"
+                  animate={{ 
+                    width: ["20%", "95%", "40%", "85%", "20%"],
+                    backgroundColor: ["#427AA1", "#EAB308", "#6BA4C7", "#F59E0B", "#427AA1"]
+                  }}
+                  transition={{ 
+                    duration: 8.5, 
+                    repeat: Number.POSITIVE_INFINITY, 
+                    ease: "easeInOut" 
+                  }}
+                  className="h-full rounded-full"
                 />
               </div>
             </div>
@@ -160,7 +197,7 @@ export function FeaturesSection() {
             
             <div className="relative z-10 grid sm:grid-cols-2 gap-8 items-center">
               <div>
-                <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-sm">
+                <div className="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center mb-6 backdrop-blur-sm border border-white/10">
                   <BrainCircuit className="w-6 h-6 text-white" />
                 </div>
                 <h3 className="text-2xl font-bold text-white mb-3">Memoria Transaccional</h3>

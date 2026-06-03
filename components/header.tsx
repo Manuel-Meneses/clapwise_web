@@ -52,7 +52,7 @@ export function Header() {
         <div className="flex items-center justify-between">
           
           {/* IDENTIDAD VISUAL (TU LOGO SVG) */}
-          <a href="#" onClick={handleLogoClick} className="flex items-center cursor-pointer transition-transform hover:scale-105 duration-300">
+          <a href="/" className="flex items-center cursor-pointer transition-transform hover:scale-105 duration-300">
             <Image 
               src="/logo_web.svg" 
               alt="ClapWise Logo" 
@@ -64,28 +64,49 @@ export function Header() {
           </a>
 
           {/* NAVEGACIÓN CENTRAL */}
-          <nav className="hidden md:flex items-center gap-10">
-            {['El Agente', 'Infraestructura', 'Precios'].map((item) => (
-              <a
-                key={item}
-                href={`#${item.toLowerCase().replace(' ', '-')}`}
-                onClick={(e) => handleSmoothScroll(e, item.toLowerCase().replace(' ', '-'))}
-                className="text-sm font-medium text-[#4C4B4B] hover:text-[#427AA1] transition-colors cursor-pointer"
-              >
-                {item}
-              </a>
-            ))}
-          </nav>
+<nav className="hidden md:flex items-center gap-10">
+  {['El Agente', 'Infraestructura', 'Precios'].map((item) => {
+    const isAgent = item === 'El Agente';
+    
+    if (isAgent) {
+      return (
+        <a
+          key={item}
+          href="/como-funciona" // URL de la nueva página dedicada
+          className="text-sm font-medium text-[#4C4B4B] hover:text-[#427AA1] transition-colors cursor-pointer"
+        >
+          {item}
+        </a>
+      );
+    }
 
-          {/* LLAMADO A LA ACCIÓN PRINCIPAL */}
-          <div className="hidden md:flex items-center gap-1">
-            <button className="relative flex items-center justify-center gap-2 bg-[#427AA1] text-white rounded-full pl-5 pr-1.5 py-1.5 transition-all duration-300 group overflow-hidden hover:bg-[#00324D] hover:shadow-md">
-              <span className="text-sm font-semibold tracking-wide">Iniciar Prueba</span>
-              <span className="w-7 h-7 bg-white rounded-full flex items-center justify-center transition-transform group-hover:scale-105">
-                <ArrowUpRight className="w-3.5 h-3.5 text-[#427AA1] group-hover:text-[#00324D] transition-colors" />
-              </span>
-            </button>
-          </div>
+    // El resto de los links siguen con su comportamiento de smooth scroll
+    const targetId = item.toLowerCase().replace(' ', '-');
+    return (
+      <a
+        key={item}
+        href={`#${targetId}`}
+        onClick={(e) => handleSmoothScroll(e, targetId)}
+        className="text-sm font-medium text-[#4C4B4B] hover:text-[#427AA1] transition-colors cursor-pointer"
+      >
+        {item}
+      </a>
+    );
+  })}
+</nav>          {/* LLAMADO A LA ACCIÓN PRINCIPAL */}
+        <div className="hidden md:flex items-center gap-1">
+  <a 
+    href="https://calendly.com/clapwise/30min" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    className="relative flex items-center justify-center gap-2 bg-[#427AA1] text-white rounded-full pl-5 pr-1.5 py-1.5 transition-all duration-300 group overflow-hidden hover:bg-[#00324D] hover:shadow-md"
+  >
+    <span className="text-sm font-semibold tracking-wide">Iniciar Prueba</span>
+    <span className="w-7 h-7 bg-white rounded-full flex items-center justify-center transition-transform group-hover:scale-105">
+      <ArrowUpRight className="w-3.5 h-3.5 text-[#427AA1] group-hover:text-[#00324D] transition-colors" />
+    </span>
+  </a>
+</div> 
 
           {/* BOTÓN MENÚ MÓVIL */}
           <button

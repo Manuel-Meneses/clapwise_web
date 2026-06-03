@@ -5,7 +5,7 @@ import { motion } from "framer-motion"
 
 export default function FeaturesSection() {
   return (
-    <section id="features" className="py-24 md:py-32 px-6 relative bg-[#F3F4F6]">
+    <section id="features" className="py-16 md:py-24 px-6 relative bg-[#F3F4F6]">
       <div className="max-w-6xl mx-auto relative z-10">
         
         {/* ENCABEZADO DE LA SECCIÓN */}

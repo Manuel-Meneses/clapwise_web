@@ -25,7 +25,7 @@ export default function PricingSection() {
   if (!isMounted) return null
 
   return (
-    <section id="precios" className="py-24 bg-white relative overflow-hidden">
+    <section id="precios" className="py-16 md:py-24 bg-white relative overflow-hidden">
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         
         {/* ==========================================
@@ -60,7 +60,7 @@ export default function PricingSection() {
             Inversión clara. <br/> <span className="text-[#427AA1]">Retorno inmediato.</span>
           </h2>
           <p className="text-gray-500 text-lg">
-            Modelo de suscripción híbrido. Pagás una única vez por la integración de tu base de datos, y luego una suscripción mensual fija[cite: 6].
+            Modelo de suscripción híbrido. Pagás una única vez por la integración de tu base de datos, y luego una suscripción mensual fija.
           </p>
         </div>
 
@@ -112,7 +112,7 @@ export default function PricingSection() {
               </ul>
 
               {/* Integración Calendario / Meet */}
-              <a href="https://calendly.com/tu-usuario" target="_blank" rel="noopener noreferrer" className="w-full">
+              <a href="https://calendly.com/clapwise/30min" target="_blank" rel="noopener noreferrer" className="w-full">
                 <Button className="w-full h-12 bg-white text-[#00324D] border-2 border-gray-200 hover:bg-gray-50 hover:border-gray-300 font-bold rounded-xl transition-all flex items-center justify-center gap-2">
                   <Calendar className="w-4 h-4" /> Agendar reunión por Meet
                 </Button>
@@ -164,7 +164,7 @@ export default function PricingSection() {
               </ul>
 
               {/* Integración Calendario / Meet */}
-              <a href="https://calendly.com/tu-usuario" target="_blank" rel="noopener noreferrer" className="w-full">
+              <a href="https://calendly.com/clapwise/30min" target="_blank" rel="noopener noreferrer" className="w-full">
                 <Button className="w-full h-12 bg-[#427AA1] text-white hover:bg-blue-600 font-bold rounded-xl border-none transition-all shadow-[0_0_20px_rgba(66,122,161,0.3)] flex items-center justify-center gap-2">
                   <Calendar className="w-4 h-4" /> Agendar demostración
                 </Button>

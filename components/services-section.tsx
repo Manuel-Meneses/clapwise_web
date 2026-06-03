@@ -14,7 +14,7 @@ import { MapPin, Mic, Brain, Workflow } from "lucide-react"
   if (!isMounted) return null
 
   return (
-    <section className="py-24 bg-background relative overflow-hidden">
+    <section className="py-16 md:py-24 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 md:px-6 max-w-6xl">
         
         {/* CABECERA */}

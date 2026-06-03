@@ -1,87 +1,69 @@
-"use client"
-
-import { useState } from "react"
-import { motion, AnimatePresence } from "framer-motion"
-import { ChevronDown, HelpCircle } from "lucide-react"
-
-const faqs = [
-  {
-    question: "¿Puede el Agente 'alucinar' e inventar precios o descuentos?",
-    answer: "Imposible. Utilizamos una arquitectura RAG (Retrieval-Augmented Generation) estrictamente determinista. El agente no 'inventa' respuestas comerciales; lee directamente tu base de datos y catálogo en tiempo real. Si no hay stock, no lo ofrece."
-  },
-  {
-    question: "¿Qué pasa si el cliente pide hablar con un humano?",
-    answer: "El sistema cuenta con un protocolo de 'Handover' automático. Si detecta frustración o una solicitud explícita de hablar con un humano, el agente pausa su intervención, etiqueta el chat y notifica a tu equipo de soporte instantáneamente."
-  },
-  {
-    question: "¿Necesito un equipo técnico para implementarlo?",
-    answer: "No. Vos solo nos das acceso de lectura a tu catálogo (Tiendanube/Shopify) y nosotros nos encargamos del 100% de la ingeniería, el entrenamiento del prompt comercial y el despliegue en WhatsApp. Listo en menos de 48 horas."
-  },
-  {
-    question: "¿Cómo funciona la garantía de 'Riesgo Cero' de 7 días?",
-    answer: "Te instalamos el agente y lo dejamos operar durante una semana entera sin cobrarte la suscripción. Vas a poder ver en vivo cómo recupera carritos y cierra ventas. Si el ROI no es evidente, lo desinstalamos y no pagás el mes."
-  }
-]
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion"
+import { HelpCircle } from "lucide-react"
 
 export function FAQSection() {
-  const [openIndex, setOpenIndex] = useState<number | null>(0) // El primero abierto por defecto
-
   return (
-    <section id="faq" className="py-24 md:py-32 px-6 bg-white">
-      <div className="max-w-4xl mx-auto">
+    <section className="py-16 md:py-24 bg-white relative overflow-hidden border-t border-gray-100">
+      <div className="max-w-4xl mx-auto px-6 relative z-10">
         
-        <div className="text-center mb-16">
-          <div className="w-12 h-12 bg-[#427AA1]/10 rounded-2xl flex items-center justify-center mx-auto mb-6">
+        {/* Cabecera Minimalista */}
+        <div className="mb-12 md:mb-16">
+          <div className="w-12 h-12 bg-blue-50 rounded-2xl flex items-center justify-center mb-6">
             <HelpCircle className="w-6 h-6 text-[#427AA1]" />
           </div>
-          <motion.h2 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="font-serif text-3xl md:text-5xl font-bold text-[#192832] mb-6 tracking-tight"
-          >
+          <h2 className="text-3xl md:text-5xl font-bold font-serif tracking-tight text-[#192832] mb-4">
             Preguntas <span className="text-[#427AA1]">frecuentes.</span>
-          </motion.h2>
+          </h2>
+          <p className="text-gray-500 text-lg">
+            Transparencia técnica y comercial sobre cómo opera nuestra infraestructura.
+          </p>
         </div>
 
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <motion.div 
-              key={index}
-              initial={{ opacity: 0, y: 10 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="border border-[#D1D5DB]/60 rounded-2xl overflow-hidden bg-[#F3F4F6]/50 hover:bg-[#F3F4F6] transition-colors"
-            >
-              <button
-                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
-              >
-                <span className="font-bold text-[#192832] pr-4">{faq.question}</span>
-                <ChevronDown 
-                  className={`w-5 h-5 text-[#427AA1] transition-transform duration-300 flex-shrink-0 ${openIndex === index ? "rotate-180" : ""}`} 
-                />
-              </button>
-              
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: "auto", opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  >
-                    <div className="p-6 pt-0 text-[#4C4B4B] font-medium leading-relaxed border-t border-[#D1D5DB]/30 mt-2">
-                      {faq.answer}
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
-        </div>
+        {/* Acordeón de Preguntas (Basado en la Documentación Real) */}
+        <Accordion type="single" collapsible className="w-full space-y-4">
+          
+          <AccordionItem value="item-1" className="border border-gray-200 bg-gray-50/50 px-6 rounded-2xl data-[state=open]:bg-white data-[state=open]:shadow-md transition-all">
+            <AccordionTrigger className="text-left font-semibold text-[#192832] hover:no-underline py-6">
+              ¿El bot puede inventar precios o vender algo sin stock?
+            </AccordionTrigger>
+            <AccordionContent className="text-gray-600 leading-relaxed pb-6">
+              No. Utilizamos una arquitectura híbrida determinista. El cerebro probabilístico (la IA) está estrictamente separado de nuestra base de datos relacional. El agente está obligado a consultar el inventario en tiempo real antes de responder; si el stock llega a cero, la transacción se bloquea instantáneamente.
+            </AccordionContent>
+          </AccordionItem>
 
+          <AccordionItem value="item-2" className="border border-gray-200 bg-gray-50/50 px-6 rounded-2xl data-[state=open]:bg-white data-[state=open]:shadow-md transition-all">
+            <AccordionTrigger className="text-left font-semibold text-[#192832] hover:no-underline py-6">
+              ¿Tengo que armar un Excel perfecto para empezar a usarlo?
+            </AccordionTrigger>
+            <AccordionContent className="text-gray-600 leading-relaxed pb-6">
+              Para nada, garantizamos "fricción cero". Podés enviarnos tu catálogo en un PDF, listas desordenadas o audios caóticos. Nuestro pipeline interno se encarga de limpiar, estructurar y vectorizar la información automáticamente para inyectarla en la base de datos.
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="item-3" className="border border-gray-200 bg-gray-50/50 px-6 rounded-2xl data-[state=open]:bg-white data-[state=open]:shadow-md transition-all">
+            <AccordionTrigger className="text-left font-semibold text-[#192832] hover:no-underline py-6">
+              ¿Cómo funciona el modelo de cobro?
+            </AccordionTrigger>
+            <AccordionContent className="text-gray-600 leading-relaxed pb-6">
+              Operamos con un modelo B2B SaaS híbrido. Cobramos un "Setup Fee" (costo de instalación) por única vez que cubre el trabajo de limpieza de datos y configuración inicial de la base de datos. Luego, solo pagás una suscripción mensual fija (MRR) por el mantenimiento y el servicio continuo de la IA.
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="item-4" className="border border-gray-200 bg-gray-50/50 px-6 rounded-2xl data-[state=open]:bg-white data-[state=open]:shadow-md transition-all">
+            <AccordionTrigger className="text-left font-semibold text-[#192832] hover:no-underline py-6">
+              ¿Mis clientes se van a dar cuenta de que hablan con un bot?
+            </AccordionTrigger>
+            <AccordionContent className="text-gray-600 leading-relaxed pb-6">
+              Entrenamos a los agentes para tener empatía comercial e hiper-localización. Se comunican con la jerga específica de tu negocio y tu región, replicando la experiencia de hablar con un vendedor humano en tu mostrador. Además, en casos de alta complejidad, la IA deriva la conversación a un operador humano sin perder el contexto.
+            </AccordionContent>
+          </AccordionItem>
+
+        </Accordion>
       </div>
     </section>
   )

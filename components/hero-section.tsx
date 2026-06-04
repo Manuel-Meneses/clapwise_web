@@ -17,7 +17,7 @@ export default function HeroSection() {
 
   return (
     // Reducimos el padding superior e inferior, y quitamos el min-h-screen estricto para que todo encuadre mejor
-    <section className="relative w-full pt-20 pb-16 md:pt-32 md:pb-24 flex flex-col items-center justify-center relative overflow-hidden bg-background">
+    <section className="relative w-full pt-28 pb-16 md:pt-40 md:pb-24 flex flex-col items-center justify-center relative overflow-hidden bg-background">
       <div className="max-w-6xl mx-auto w-full relative z-10 flex flex-col items-center">
         
         {/* 1. TEXTOS Y LLAMADOS A LA ACCIÓN */}

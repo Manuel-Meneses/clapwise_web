@@ -63,7 +63,7 @@ export function Header() {
               )
             }
             
-            const targetId = item.toLowerCase().replace(' ', '-')
+            const targetId = item === 'Infraestructura' ? 'features' : item.toLowerCase().replace(' ', '-')
             return (
               <a
                 key={item}
@@ -80,7 +80,7 @@ export function Header() {
         {/* BOTÓN CTA ORIGINAL (Actualizado a tag <a> para el link a Calendly) */}
         <div className="hidden md:flex items-center gap-1">
           <a 
-            href="https://calendly.com/TU-ENLACE-REAL" 
+            href="https://calendly.com/clapwise/30min" 
             target="_blank" 
             rel="noopener noreferrer"
             className="relative flex items-center justify-center gap-2 bg-[#427AA1] text-white rounded-full pl-5 pr-1.5 py-1.5 transition-all duration-300 group overflow-hidden hover:bg-[#00324D] hover:shadow-md"

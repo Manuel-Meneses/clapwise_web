@@ -83,65 +83,95 @@ export default function FeaturesSection() {
             </div>
           </motion.div>
 
-          {/* BENTO ITEM 2: Hiper-Localización (Radar / Mapa Interactivo) */}
+         {/* BENTO ITEM 2: Hiper-Localización (Radar sobre Google Maps Realista) */}
           <motion.div 
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="bg-[#00324D] rounded-3xl p-8 shadow-2xl flex flex-col justify-between relative overflow-hidden group min-h-[300px]"
+            className="bg-[#050A0F] rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.3)] flex flex-col justify-between relative overflow-hidden group min-h-[350px] border border-slate-800"
           >
-            {/* Fondo Interactivo tipo Radar/Mapa */}
-            <div className="absolute inset-0 z-0 overflow-hidden">
-              {/* Grilla estilo mapa digital */}
-              <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff15_1px,transparent_1px),linear-gradient(to_bottom,#ffffff15_1px,transparent_1px)] bg-[size:24px_24px]" />
+            {/* Fondo Interactivo: Google Maps Realista en Dark Mode */}
+            <div className="absolute inset-0 z-0 overflow-hidden bg-[#101418]">
               
-              {/* Efecto de barrido de radar */}
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 8, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-                className="absolute top-[40%] left-1/2 w-[500px] h-[500px] -ml-[250px] -mt-[250px] rounded-full opacity-30 pointer-events-none"
-                style={{
-                  background: "conic-gradient(from 0deg, transparent 70%, rgba(66, 122, 161, 0.2) 80%, rgba(66, 122, 161, 0.9) 100%)",
+              {/* Truco dev: iframe de Google Maps centrado en la ciudad con filtros CSS para Dark Mode */}
+              <iframe 
+                src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d27253.945893322194!2d-64.2045!3d-31.4116!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar"
+                className="w-[150%] h-[150%] absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 opacity-60 pointer-events-none select-none"
+                style={{ 
+                  filter: "invert(100%) hue-rotate(180deg) contrast(110%) brightness(80%) grayscale(20%)" 
                 }}
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
               />
+              
+              {/* Overlay azul sutil para integrar el mapa a los colores de tu marca */}
+              <div className="absolute inset-0 bg-[#00324D]/30 mix-blend-multiply pointer-events-none" />
+              
+              {/* Efecto de barrido de radar y anillos */}
+              <div className="absolute top-1/2 left-1/2 w-[400px] h-[400px] -ml-[200px] -mt-[200px] pointer-events-none">
+                {/* Anillos de distancia fijos */}
+                <div className="absolute inset-0 border border-[#427AA1]/20 rounded-full" />
+                <div className="absolute inset-12 border border-[#427AA1]/15 rounded-full" />
+                <div className="absolute inset-24 border border-[#427AA1]/10 rounded-full" />
+                
+                {/* Barrido cónico giratorio */}
+                <motion.div
+                  animate={{ rotate: 360 }}
+                  transition={{ duration: 6, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+                  className="absolute inset-0 rounded-full"
+                  style={{
+                    background: "conic-gradient(from 0deg, transparent 75%, rgba(66, 122, 161, 0.1) 85%, rgba(66, 122, 161, 0.6) 100%)",
+                  }}
+                />
+              </div>
 
               {/* Punto Interactivo 1: Nueva Córdoba */}
-              <div className="absolute top-[30%] left-[30%] group/pin cursor-pointer z-20">
-                <motion.div initial={{ scale: 0 }} whileInView={{ scale: 1 }} className="w-2.5 h-2.5 bg-red-400 rounded-full relative z-10" />
-                <motion.div animate={{ scale: [1, 3], opacity: [0.5, 0] }} transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }} className="absolute inset-0 bg-red-400 rounded-full" />
-                {/* Tooltip Hover */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-2 rounded-xl opacity-0 group-hover/pin:opacity-100 transition-all transform translate-y-2 group-hover/pin:translate-y-0 pointer-events-none shadow-xl w-max">
-                  <p className="text-white font-bold text-xs">Nueva Córdoba</p>
-                  <p className="text-white/70 text-[10px] flex items-center gap-1 mt-1"><Navigation className="w-3 h-3" /> Envío: $1.500</p>
+              <div className="absolute top-[55%] left-[55%] group/pin cursor-pointer z-20">
+                <motion.div initial={{ scale: 0 }} whileInView={{ scale: 1 }} className="w-3 h-3 bg-[#3B82F6] rounded-full relative z-10 border-2 border-white shadow-[0_0_15px_#3B82F6]" />
+                <motion.div animate={{ scale: [1, 2.5], opacity: [0.6, 0] }} transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }} className="absolute inset-0 bg-[#3B82F6] rounded-full" />
+                
+                {/* Tooltip Hover Estilo Mapa Nativo */}
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 bg-white/95 backdrop-blur-xl border border-slate-200 px-3 py-2 rounded-xl opacity-0 group-hover/pin:opacity-100 transition-all transform translate-y-2 group-hover/pin:translate-y-0 shadow-xl w-max">
+                  {/* Flechita inferior del tooltip */}
+                  <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-b border-r border-slate-200 rotate-45" />
+                  <p className="text-slate-900 font-bold text-xs relative z-10">Nueva Córdoba</p>
+                  <p className="text-slate-500 text-[10px] flex items-center gap-1 mt-0.5 relative z-10 font-medium">
+                    <Navigation className="w-3 h-3 text-[#3B82F6]" /> Envío: $1.500
+                  </p>
                 </div>
               </div>
 
-              {/* Punto Interactivo 2: Cerro */}
-              <div className="absolute top-[60%] left-[65%] group/pin cursor-pointer z-20">
-                <motion.div initial={{ scale: 0 }} whileInView={{ scale: 1 }} className="w-2.5 h-2.5 bg-teal-400 rounded-full relative z-10" />
-                <motion.div animate={{ scale: [1, 3], opacity: [0.5, 0] }} transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 1 }} className="absolute inset-0 bg-teal-400 rounded-full" />
-                {/* Tooltip Hover */}
-                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-white/10 backdrop-blur-md border border-white/20 px-3 py-2 rounded-xl opacity-0 group-hover/pin:opacity-100 transition-all transform translate-y-2 group-hover/pin:translate-y-0 pointer-events-none shadow-xl w-max">
-                  <p className="text-white font-bold text-xs">Cerro de las Rosas</p>
-                  <p className="text-white/70 text-[10px] flex items-center gap-1 mt-1"><Navigation className="w-3 h-3" /> Envío: $2.500</p>
+              {/* Punto Interactivo 2: Cerro de las Rosas */}
+              <div className="absolute top-[35%] left-[30%] group/pin cursor-pointer z-20">
+                <motion.div initial={{ scale: 0 }} whileInView={{ scale: 1 }} className="w-3 h-3 bg-[#E1306C] rounded-full relative z-10 border-2 border-white shadow-[0_0_15px_#E1306C]" />
+                <motion.div animate={{ scale: [1, 2.5], opacity: [0.6, 0] }} transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY, delay: 1 }} className="absolute inset-0 bg-[#E1306C] rounded-full" />
+                
+                {/* Tooltip Hover Estilo Mapa Nativo */}
+                <div className="absolute bottom-full left-1/2 -translate-x-1/2 mb-3 bg-white/95 backdrop-blur-xl border border-slate-200 px-3 py-2 rounded-xl opacity-0 group-hover/pin:opacity-100 transition-all transform translate-y-2 group-hover/pin:translate-y-0 shadow-xl w-max">
+                  {/* Flechita inferior del tooltip */}
+                  <div className="absolute -bottom-1.5 left-1/2 -translate-x-1/2 w-3 h-3 bg-white border-b border-r border-slate-200 rotate-45" />
+                  <p className="text-slate-900 font-bold text-xs relative z-10">Cerro de las Rosas</p>
+                  <p className="text-slate-500 text-[10px] flex items-center gap-1 mt-0.5 relative z-10 font-medium">
+                    <Navigation className="w-3 h-3 text-[#E1306C]" /> Envío: $2.500
+                  </p>
                 </div>
               </div>
 
-              {/* Degradado para integrar con el texto inferior */}
-              <div className="absolute inset-0 bg-gradient-to-t from-[#00324D] via-[#00324D]/40 to-transparent pointer-events-none" />
+              {/* Degradado oscuro para integrar el mapa con los textos */}
+              <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#050A0F] via-[#050A0F]/80 to-transparent pointer-events-none z-10" />
             </div>
 
-            <div className="relative z-10 pointer-events-none h-full flex flex-col justify-end">
-              <div className="bg-white/10 backdrop-blur-md p-3 rounded-2xl mb-4 shadow-lg w-fit border border-white/20">
-                <MapPin className="w-6 h-6 text-white" />
+            <div className="relative z-20 pointer-events-none h-full flex flex-col justify-end p-8">
+              <div className="bg-[#1e293b]/80 backdrop-blur-md p-2.5 rounded-xl mb-4 shadow-lg w-fit border border-white/10">
+                <MapPin className="w-5 h-5 text-[#427AA1]" />
               </div>
-              <h3 className="text-xl font-bold text-white mb-2">Logística Barrial</h3>
-              <p className="text-white/70 text-sm font-medium">
-                Calcula envíos exactos en milisegundos reconociendo barrios, zonas y cadeterías locales.
+              <h3 className="text-xl font-bold text-white mb-2">Logística Barrial Nativa</h3>
+              <p className="text-slate-400 text-sm font-medium leading-relaxed">
+                Reconocimiento geográfico preciso. El agente identifica barrios, zonas y distancias para cotizar el envío exacto junto con la compra.
               </p>
             </div>
-          </motion.div>
+          </motion.div> 
 
           {/* BENTO ITEM 3: Adaptación de Tono (CAMALEÓN SEMÁNTICO) */}
           <motion.div 

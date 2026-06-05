@@ -3,7 +3,21 @@
 import { useEffect, useRef, useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { 
-  ArrowRight, Database, Code2, ShieldCheck, Activity, FileSpreadsheet
+  ArrowRight, Database, Code2, ShieldCheck, Activity, FileSpreadsheet, Shirt,
+  MessageCircle, Instagram, Globe, Smartphone,
+  Send,
+  ImageIcon,
+  Camera,
+  Mic,
+  Plus,
+  CheckCheck,
+  Phone,
+  Info,
+  Video,
+  ArrowLeft,
+  Wifi,
+  Battery,
+  Signal
 } from "lucide-react"
 
 import { Header } from "@/components/header"
@@ -17,17 +31,16 @@ const LOGOS = {
 }
 
 const PHASES = [
-  { id: "entropia", title: "Filtro de Entropía", logo: LOGOS.python, color: "text-blue-600", border: "border-blue-500" },
-  { id: "tensores", title: "Tensores Semánticos", logo: LOGOS.gemini, color: "text-purple-600", border: "border-purple-500" },
-  { id: "db", title: "Verdad Relacional", logo: LOGOS.supabase, color: "text-emerald-600", border: "border-emerald-500" },
-  { id: "langgraph", title: "Orquestación ReAct", logo: LOGOS.langgraph, color: "text-orange-600", border: "border-orange-500" }
+  { id: "entropia", title: "Limpieza de Talles", logo: LOGOS.python, color: "text-blue-600", border: "border-blue-500" },
+  { id: "tensores", title: "Comprensión de Moda", logo: LOGOS.gemini, color: "text-purple-600", border: "border-purple-500" },
+  { id: "db", title: "Stock Anti-Quiebres", logo: LOGOS.supabase, color: "text-emerald-600", border: "border-emerald-500" },
+  { id: "langgraph", title: "Agente Vendedor", logo: LOGOS.langgraph, color: "text-orange-600", border: "border-orange-500" }
 ]
 
 // ==========================================
 // COMPONENTES CANVAS (RENDERIZADO NATIVO 2D)
 // ==========================================
 
-// 1. Puente de Einstein-Rosen (Entropía)
 const WormholeCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -106,7 +119,6 @@ const WormholeCanvas = () => {
   return <canvas ref={canvasRef} className="w-full h-full rounded-2xl" />
 }
 
-// 2. Red Neuronal (Tensores)
 const TensorNetworkCanvas = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null)
 
@@ -185,12 +197,35 @@ const TensorNetworkCanvas = () => {
 export default function ComoFuncionaPage() {
   const [isMounted, setIsMounted] = useState(false)
   const [activeTab, setActiveTab] = useState(0)
+  const [activeChannel, setActiveChannel] = useState<'whatsapp' | 'instagram' | 'web'>('whatsapp')
 
   useEffect(() => {
     setIsMounted(true)
   }, [])
 
   if (!isMounted) return null
+
+  // Chats de ejemplo para la nueva sección
+  const CHATS = {
+    whatsapp: [
+      { sender: 'user', text: 'Che, tenés el buzo over en negro talle L?' },
+      { sender: 'bot', text: '¡Hola! 👋 Sí, me queda el último en stock 🔥. Sale $25.000. ¿Te lo separo y te paso el link de pago?' },
+      { sender: 'user', text: 'Dale de una, pasame' },
+      { sender: 'bot', text: '¡Excelente! Acá tenés el link directo para abonar: pagos.clapwise.com/buzo-negro. Apenas pagues me avisa y te preparo el paquete 📦🚀' }
+    ],
+    instagram: [
+      { sender: 'user', text: 'Precio de las zapas de la historia?? talle 40' },
+      { sender: 'bot', text: '¡Qué onda! 😎 Son las Sneakers Urban. En talle 40 me quedan en blanco y en gris. Salen $65.000.' },
+      { sender: 'user', text: 'Uh me re sirven en blanco, hacen envíos a Nueva Córdoba?' },
+      { sender: 'bot', text: 'Obvio 🛵. A Nueva Córdoba llega en el día si confirmamos ahora. Te dejo el link para pedirlas: link.clapwise.com/zapas 👟' }
+    ],
+    web: [
+      { sender: 'user', text: 'Tienen cambio si no me va el talle?' },
+      { sender: 'bot', text: '¡Hola! Sí, tenés 30 días para cambios gratis en cualquier sucursal o por correo ♻️.' },
+      { sender: 'user', text: 'Joya, tienen stock del Jean Mom en 42?' },
+      { sender: 'bot', text: 'Bancame que me fijo... 🔎 Sí, tenemos 3 unidades disponibles del Jean Mom Clásico en 42. ¿Te ayudo con algo más?' }
+    ]
+  }
 
   return (
     <main className="min-h-screen bg-[#F8FAFC] selection:bg-[#427AA1]/20 font-sans text-slate-900">
@@ -199,24 +234,23 @@ export default function ComoFuncionaPage() {
       {/* ==========================================
           1. HERO SECTION (TEXTO IZQ / IMAGEN DER)
           ========================================== */}
-      <section className="pt-32 pb-16 md:pt-40 md:pb-24 px-6 max-w-7xl mx-auto border-b border-slate-200">
+      <section className="pt-32 pb-16 md:pt-40 md:pb-24 px-6 max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row items-center gap-12 lg:gap-20">
           
           <div className="w-full md:w-1/2 flex flex-col justify-center">
-            
             <motion.h1 
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
-              className="text-4xl md:text-6xl font-serif font-bold tracking-tight text-slate-900 mb-6 leading-[1.1]"
+              className="text-4xl md:text-6xl font-extrabold font-serif tracking-tight text-slate-900 mb-6 leading-[1.1]"
             >
-              Orquestación pura. <br />
-              <span className="text-[#427AA1]">Cero alucinaciones.</span>
+              Ventas automáticas. <br />
+              <span className="text-[#427AA1]">Stock perfecto.</span>
             </motion.h1>
             
             <motion.p 
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
               className="text-lg text-slate-500 font-medium leading-relaxed"
             >
-              Explorá el pipeline de datos detrás de ClapWise. Diseñamos un flujo donde la matemática estricta aísla al modelo de lenguaje para garantizar precisión absoluta en cada venta.
+              Sabemos que gestionar talles, colores y variantes es un infierno. Descubrí cómo ClapWise procesa tu catálogo caótico y lo transforma en un vendedor que jamás ofrece prendas que no tenés.
             </motion.p>
           </div>
 
@@ -226,11 +260,11 @@ export default function ComoFuncionaPage() {
               className="relative w-full aspect-[4/3] rounded-3xl overflow-hidden shadow-2xl border border-slate-100"
             >
               <img 
-                src="/waves.jpg" 
-                alt="Paisaje Elegante Minimalista" 
+                src="https://images.unsplash.com/photo-1441984904996-e0b6ba687e04?q=80&w=2000&auto=format&fit=crop" 
+                alt="Tienda de Indumentaria Minimalista" 
                 className="w-full h-full object-cover"
               />
-              <div className="absolute inset-0 bg-gradient-to-tr from-[#00324D]/20 to-transparent mix-blend-overlay" />
+              <div className="absolute inset-0 bg-gradient-to-tr from-[#00324D]/30 to-transparent mix-blend-overlay" />
             </motion.div>
           </div>
 
@@ -238,14 +272,251 @@ export default function ComoFuncionaPage() {
       </section>
 
       {/* ==========================================
-          2. INTERACTIVE SLIDESHOW (VOICEFLOW STYLE)
+          NUEVA SECCIÓN: EL AGENTE EN ACCIÓN (Día a Día)
           ========================================== */}
-      <section className="py-20 px-6">
+      <section className="py-24 px-6 bg-white border-y border-slate-200 overflow-hidden">
+        <div className="max-w-6xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+          
+          {/* Textos y Controles */}
+          <div className="w-full lg:w-1/2">
+            <motion.div initial={{ opacity: 0, x: -20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true }}>
+              <h2 className="text-3xl md:text-5xl font-extrabold font-serif text-slate-900 mb-6 leading-tight">
+                El bot se pone la 10 <br/> en todos tus canales.
+              </h2>
+              <p className="text-lg text-slate-500 mb-8 leading-relaxed">
+                Olvidate de clavar el visto. Mientras vos armás paquetes, reponés stock o simplemente dormís, el agente atiende, asesora y manda links de pago las 24 horas del día.
+              </p>
+
+              {/* Botones de Selección */}
+              <div className="flex flex-col gap-3">
+                <button 
+                  onClick={() => setActiveChannel('whatsapp')}
+                  className={`flex items-center gap-4 p-4 rounded-2xl transition-all border-2 ${activeChannel === 'whatsapp' ? 'border-[#25D366] bg-[#25D366]/5 shadow-sm' : 'border-transparent hover:bg-slate-50'}`}
+                >
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${activeChannel === 'whatsapp' ? 'bg-[#25D366] text-white' : 'bg-slate-100 text-slate-500'}`}>
+                    <MessageCircle className="w-6 h-6" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className={`font-bold ${activeChannel === 'whatsapp' ? 'text-[#25D366]' : 'text-slate-700'}`}>WhatsApp</h4>
+                    <p className="text-xs text-slate-500">Cierre de ventas directo.</p>
+                  </div>
+                </button>
+
+                <button 
+                  onClick={() => setActiveChannel('instagram')}
+                  className={`flex items-center gap-4 p-4 rounded-2xl transition-all border-2 ${activeChannel === 'instagram' ? 'border-[#E1306C] bg-[#E1306C]/5 shadow-sm' : 'border-transparent hover:bg-slate-50'}`}
+                >
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${activeChannel === 'instagram' ? 'bg-gradient-to-tr from-[#F56040] to-[#E1306C] text-white' : 'bg-slate-100 text-slate-500'}`}>
+                    <Instagram className="w-6 h-6" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className={`font-bold ${activeChannel === 'instagram' ? 'text-[#E1306C]' : 'text-slate-700'}`}>Instagram DMs</h4>
+                    <p className="text-xs text-slate-500">Respuestas a historias y posts.</p>
+                  </div>
+                </button>
+
+                <button 
+                  onClick={() => setActiveChannel('web')}
+                  className={`flex items-center gap-4 p-4 rounded-2xl transition-all border-2 ${activeChannel === 'web' ? 'border-[#427AA1] bg-[#427AA1]/5 shadow-sm' : 'border-transparent hover:bg-slate-50'}`}
+                >
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${activeChannel === 'web' ? 'bg-[#427AA1] text-white' : 'bg-slate-100 text-slate-500'}`}>
+                    <Globe className="w-6 h-6" />
+                  </div>
+                  <div className="text-left">
+                    <h4 className={`font-bold ${activeChannel === 'web' ? 'text-[#427AA1]' : 'text-slate-700'}`}>Web Chat</h4>
+                    <p className="text-xs text-slate-500">Soporte y dudas de envíos.</p>
+                  </div>
+                </button>
+              </div>
+            </motion.div>
+          </div>
+
+          {/* Celular / Interfaz Mockup */}
+         <div className="w-full lg:w-1/2 flex justify-center">
+            <motion.div 
+              initial={{ opacity: 0, y: 30 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }}
+              className="relative w-[320px] h-[640px] bg-slate-900 rounded-[2.5rem] p-3 shadow-2xl border-4 border-slate-800"
+            >
+              {/* Pantalla del celular */}
+              <div className="w-full h-full bg-slate-50 rounded-[2rem] overflow-hidden flex flex-col relative shadow-inner">
+                
+                {/* iOS Status Bar Simulado */}
+                <div className={`w-full h-6 px-5 flex justify-between items-center text-[10px] font-medium z-20 absolute top-0 left-0
+                  ${activeChannel === 'instagram' || activeChannel === 'web' ? 'text-slate-800' : 'text-white'}`}>
+                  <span>14:23</span>
+                  <div className="flex gap-1.5 items-center">
+                    <Signal className="w-3 h-3" />
+                    <Wifi className="w-3 h-3" />
+                    <Battery className="w-3 h-3" />
+                  </div>
+                </div>
+
+                {/* Header del Chat Nativo */}
+                <div className={`pt-8 pb-3 px-4 flex items-center gap-3 shadow-sm z-10 transition-colors duration-300
+                  ${activeChannel === 'whatsapp' ? 'bg-[#075E54] text-white' : 
+                    activeChannel === 'instagram' ? 'bg-white text-slate-900 border-b border-slate-200' : 
+                    'bg-white text-slate-900 border-b border-slate-200'}`
+                }>
+                  <div className="flex items-center gap-2 flex-1">
+                    <ArrowLeft className={`w-5 h-5 ${activeChannel === 'whatsapp' ? 'text-white' : 'text-slate-900'}`} />
+                    <div className="w-9 h-9 rounded-full bg-slate-200 overflow-hidden shrink-0 border-2 border-white/20">
+                      {/* Avatar de la tienda en el header */}
+                      <img src="/logo-clapwise.png" alt="Tienda" className="w-full h-full object-cover bg-[#192832] p-1" />
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="text-sm font-bold leading-tight tracking-tight">
+                        {activeChannel === 'instagram' ? 'tienda.oficial' : 'Tienda Oficial'}
+                      </span>
+                      <span className={`text-[10px] ${activeChannel === 'whatsapp' ? 'text-white/80' : 'text-slate-500'}`}>
+                        {activeChannel === 'instagram' ? 'Respuestas automáticas' : 'en línea'}
+                      </span>
+                    </div>
+                  </div>
+                  {/* Iconos derechos del header */}
+                  <div className="flex gap-4">
+                    {activeChannel === 'whatsapp' && (
+                      <>
+                        <Video className="w-4 h-4 text-white" />
+                        <Phone className="w-4 h-4 text-white" />
+                      </>
+                    )}
+                    {activeChannel === 'instagram' && <Info className="w-6 h-6 text-slate-900" />}
+                  </div>
+                </div>
+
+                {/* Área de Mensajes */}
+                <div className={`flex-1 p-4 flex flex-col gap-4 overflow-y-auto relative
+                  ${activeChannel === 'whatsapp' ? 'bg-[#E5DDD5]' : 'bg-white'}`}>
+                  
+                  {/* Patrón de WhatsApp (Wallpaper) */}
+                  {activeChannel === 'whatsapp' && (
+                    <div className="absolute inset-0 opacity-[0.06] bg-[url('https://i.pinimg.com/originals/85/ec/df/85ecdf1c3611ecc9b7fa85282d9526e0.jpg')] bg-repeat" />
+                  )}
+
+                  {/* Etiqueta de Fecha */}
+                  <div className="w-full flex justify-center relative z-10 mt-2">
+                    <span className={`text-[10px] px-3 py-1 font-medium rounded-lg shadow-sm
+                      ${activeChannel === 'whatsapp' ? 'bg-[#E1F2FB] text-slate-600' : 'text-slate-400'}`}>
+                      HOY
+                    </span>
+                  </div>
+
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeChannel}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -10 }}
+                      transition={{ duration: 0.3 }}
+                      className="flex flex-col gap-3 relative z-10 pb-4"
+                    >
+                      {CHATS[activeChannel].map((msg, i) => (
+                        <motion.div 
+                          key={i} 
+                          initial={{ opacity: 0, scale: 0.9, x: msg.sender === 'user' ? 10 : -10 }}
+                          animate={{ opacity: 1, scale: 1, x: 0 }}
+                          transition={{ delay: i * 0.4 }}
+                          className={`flex w-full ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                        >
+                          <div className={`flex max-w-[88%] gap-2 items-end ${msg.sender === 'user' ? 'flex-row-reverse' : 'flex-row'}`}>
+                            
+                            {/* Avatar del Bot (Visible en IG y Web) */}
+                            {msg.sender === 'bot' && activeChannel !== 'whatsapp' && (
+                              <div className="w-6 h-6 rounded-full overflow-hidden shrink-0">
+                                <img src="/logo-clapwise.png" alt="Bot" className="w-full h-full object-cover bg-[#192832] p-1" />
+                              </div>
+                            )}
+
+                            {/* Avatar del Cliente (Visible en IG y Web) */}
+                            {msg.sender === 'user' && activeChannel !== 'whatsapp' && (
+                              <div className="w-6 h-6 rounded-full overflow-hidden shrink-0">
+                                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=64&h=64" alt="User" className="w-full h-full object-cover" />
+                              </div>
+                            )}
+
+                            {/* Burbuja de Mensaje */}
+                            <div className={`relative px-3 py-2 flex flex-col gap-0.5
+                              ${activeChannel === 'whatsapp' ? 'rounded-2xl shadow-sm' : 'rounded-[1.2rem]'}
+                              ${msg.sender === 'user' 
+                                ? activeChannel === 'whatsapp' ? 'bg-[#DCF8C6] text-slate-800 rounded-tr-none' : 
+                                  activeChannel === 'instagram' ? 'bg-[#3797F0] text-white' : 
+                                  'bg-[#427AA1] text-white rounded-br-sm'
+                                : activeChannel === 'whatsapp' ? 'bg-white text-slate-800 rounded-tl-none' : 
+                                  activeChannel === 'instagram' ? 'bg-[#EFEFEF] text-slate-900 border border-slate-200/60' : 
+                                  'bg-white border border-slate-200 text-slate-800 rounded-bl-sm shadow-sm'
+                              }
+                            `}>
+                              <span className="text-[13px] leading-snug">{msg.text}</span>
+                              
+                              {/* Timestamp y Tildes */}
+                              <div className={`flex justify-end items-center gap-1 text-[9px]
+                                ${msg.sender === 'user' && activeChannel !== 'whatsapp' ? 'text-white/80' : 'text-slate-400'}`}>
+                                <span>{14 + Math.floor(i/2)}:{23 + i}</span>
+                                {msg.sender === 'user' && activeChannel === 'whatsapp' && (
+                                  <CheckCheck className="w-[14px] h-[14px] text-[#34B7F1]" />
+                                )}
+                              </div>
+                            </div>
+
+                          </div>
+                        </motion.div>
+                      ))}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+
+                {/* Input de Chat Falso Simulado por App */}
+                <div className="bg-slate-50 border-t border-slate-200 px-3 py-2 flex items-center gap-3 z-10 pb-6">
+                  {activeChannel === 'whatsapp' ? (
+                    <>
+                      <Plus className="w-6 h-6 text-[#007AFF] shrink-0" />
+                      <div className="flex-1 h-8 bg-white rounded-full border border-slate-300 px-3 flex items-center shadow-sm">
+                        <span className="text-[13px] text-slate-400 pt-0.5">Mensaje</span>
+                      </div>
+                      <Camera className="w-5 h-5 text-[#007AFF] shrink-0" />
+                      <Mic className="w-5 h-5 text-[#007AFF] shrink-0" />
+                    </>
+                  ) : activeChannel === 'instagram' ? (
+                    <>
+                      <div className="w-8 h-8 rounded-full bg-[#3797F0] flex items-center justify-center shrink-0">
+                        <Camera className="w-5 h-5 text-white" />
+                      </div>
+                      <div className="flex-1 h-9 bg-slate-100 rounded-full border border-slate-200 px-4 flex items-center">
+                        <span className="text-[13px] text-slate-400">Mensaje...</span>
+                      </div>
+                      <ImageIcon className="w-6 h-6 text-slate-800 shrink-0" />
+                    </>
+                  ) : (
+                    <>
+                      <div className="flex-1 h-10 bg-white rounded-xl border border-slate-200 px-3 flex items-center shadow-sm">
+                        <span className="text-[13px] text-slate-400">Escribe aquí...</span>
+                      </div>
+                      <div className="w-10 h-10 rounded-xl bg-[#427AA1] flex items-center justify-center text-white shrink-0 shadow-sm">
+                        <Send className="w-4 h-4" />
+                      </div>
+                    </>
+                  )}
+                </div>
+
+                {/* Home Indicator de iOS (Barra inferior) */}
+                <div className="absolute bottom-2 left-1/2 -translate-x-1/2 w-1/3 h-1 bg-slate-800 rounded-full z-20" />
+
+              </div>
+            </motion.div>
+          </div> 
+
+        </div>
+      </section>
+
+      {/* ==========================================
+          2. INTERACTIVE SLIDESHOW (PIPELINE TÉCNICO)
+          ========================================== */}
+      <section className="py-20 px-6 bg-[#F8FAFC]">
         <div className="max-w-6xl mx-auto">
           
           <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold font-serif text-slate-900">El Pipeline de Datos</h2>
-            <p className="text-slate-500 mt-2">Cómo convertimos un Excel desordenado en un agente autónomo.</p>
+            <h2 className="text-3xl font-serif font-bold text-slate-900">El Pipeline del Retail</h2>
+            <p className="text-slate-500 mt-2">Cómo convertimos tu lista de precios desordenada en ventas cerradas.</p>
           </div>
 
           {/* TAB BAR */}
@@ -269,7 +540,6 @@ export default function ComoFuncionaPage() {
           {/* MAIN CANVAS VIEWPORT */}
           <div className="w-full bg-white rounded-3xl overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-200 min-h-[500px] md:min-h-[550px] relative flex items-center justify-center">
             
-            {/* Grilla de puntos estilo Canvas */}
             <div className="absolute inset-0 bg-[radial-gradient(#e2e8f0_1px,transparent_1px)] [background-size:20px_20px] opacity-80" />
 
             <AnimatePresence mode="wait">
@@ -282,28 +552,29 @@ export default function ComoFuncionaPage() {
                 className="absolute inset-0 flex items-center justify-center p-6 md:p-12 z-10"
               >
 
+                {/* SLIDES (Mismo contenido adaptado a Ropa que te envié en el prompt anterior) */}
+                
                 {/* SLIDE 0: ENTROPÍA */}
                 {activeTab === 0 && (
                   <div className="w-full flex flex-col md:flex-row items-center gap-12 max-w-5xl">
                     <div className="w-full md:w-1/3 bg-white/80 backdrop-blur p-6 rounded-2xl border border-slate-100 shadow-sm">
-                      <h3 className="text-2xl font-bold text-slate-900 mb-4">El Demonio de Maxwell</h3>
+                      <h3 className="text-2xl font-bold text-slate-900 mb-4">El Filtro de Talles</h3>
                       <p className="text-slate-600 text-sm leading-relaxed">
-                        Al igual que la gravedad curva el tejido del espacio-tiempo, nuestro script de Python atrae y comprime datos caóticos. Extrae el nombre, precio y stock, devolviendo una estructura JSON pura y de baja entropía.
+                        Los proveedores envían listas caóticas. Nuestro script de Python comprime esos datos: extrae prendas, talles, colores y precios, descartando lo que no sirve para armar un catálogo estructurado.
                       </p>
                     </div>
                     
                     <div className="w-full md:w-2/3 h-[400px] relative bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden shadow-inner">
                       <WormholeCanvas />
-                      
-                      {/* Flujo Visual */}
                       <div className="absolute inset-0 pointer-events-none flex items-center justify-between px-8">
                         <div className="bg-white/90 backdrop-blur p-3 rounded-xl border border-red-200 text-[10px] font-mono text-red-700 shadow-lg -rotate-6">
-                          "zapas nike rotas t40 $12mil"
+                          "campera inflable negra L 45mil quedan 3"
                         </div>
                         <div className="bg-slate-900/95 backdrop-blur p-4 rounded-xl border border-slate-700 text-xs font-mono text-blue-300 shadow-2xl">
                           <span className="text-slate-500">{"{"}</span><br/>
-                          &nbsp;<span className="text-blue-400">"nombre"</span>: <span className="text-green-400">"zapatilla_nike"</span>,<br/>
-                          &nbsp;<span className="text-blue-400">"stock"</span>: <span className="text-orange-400">0</span><br/>
+                          &nbsp;<span className="text-blue-400">"prenda"</span>: <span className="text-green-400">"campera_inflable"</span>,<br/>
+                          &nbsp;<span className="text-blue-400">"talle"</span>: <span className="text-green-400">"L"</span>,<br/>
+                          &nbsp;<span className="text-blue-400">"stock"</span>: <span className="text-orange-400">3</span><br/>
                           <span className="text-slate-500">{"}"}</span>
                         </div>
                       </div>
@@ -315,19 +586,20 @@ export default function ComoFuncionaPage() {
                 {activeTab === 1 && (
                   <div className="w-full flex flex-col md:flex-row items-center gap-12 max-w-5xl">
                     <div className="w-full md:w-1/3 bg-white/80 backdrop-blur p-6 rounded-2xl border border-slate-100 shadow-sm">
-                      <h3 className="text-2xl font-bold text-slate-900 mb-4">Vectorización Espacial</h3>
+                      <h3 className="text-2xl font-bold text-slate-900 mb-4">La Jerga de la Moda</h3>
                       <p className="text-slate-600 text-sm leading-relaxed">
-                        Traducimos descripciones a coordenadas matemáticas en un espacio de 768 dimensiones. Así el sistema entiende que "Zapatilla" y "Deportiva" conforman un clúster matemático de alta densidad.
+                        ¿Tus clientes piden "zapas", "llantas" o "sneakers"? La vectorización convierte palabras en coordenadas espaciales. La IA entiende la intención de compra sin importar cómo lo escriban.
                       </p>
                     </div>
                     
                     <div className="w-full md:w-2/3 h-[400px] relative bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden shadow-inner">
                       <TensorNetworkCanvas />
-                      
-                      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur border border-slate-200 p-4 rounded-2xl shadow-xl text-center">
-                        <div className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">Tensor Generado</div>
-                        <div className="font-mono text-xs md:text-sm text-purple-700">
-                          [0.142, -0.891, 0.334, ... 0.99]
+                      <div className="absolute bottom-6 left-1/2 -translate-x-1/2 bg-white/95 backdrop-blur border border-slate-200 p-4 rounded-2xl shadow-xl text-center flex gap-4 items-center">
+                        <div className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded">"ZAPAS"</div>
+                        <div className="text-[10px] font-bold text-slate-500 bg-slate-100 px-2 py-1 rounded">"SNEAKERS"</div>
+                        <ArrowRight className="w-4 h-4 text-purple-500" />
+                        <div className="font-mono text-xs text-purple-700 font-bold bg-purple-100 px-2 py-1 rounded border border-purple-200">
+                          Match: zapatilla_deportiva
                         </div>
                       </div>
                     </div>
@@ -338,110 +610,92 @@ export default function ComoFuncionaPage() {
                 {activeTab === 2 && (
                   <div className="w-full flex flex-col md:flex-row items-center gap-12 max-w-5xl">
                     <div className="w-full md:w-1/3 bg-white/80 backdrop-blur p-6 rounded-2xl border border-slate-100 shadow-sm">
-                      <h3 className="text-2xl font-bold text-slate-900 mb-4">Verdad Relacional</h3>
+                      <h3 className="text-2xl font-bold text-slate-900 mb-4">Stock Inquebrantable</h3>
                       <p className="text-slate-600 text-sm leading-relaxed">
-                        Aislamos la IA del inventario. La consulta se resuelve de forma determinista en PostgreSQL. Si el stock indica 0, es matemáticamente imposible que el bot ofrezca el producto.
+                        El peor error de un bot es vender una prenda agotada. Aislamos la IA de tu inventario. Las consultas van a PostgreSQL. Si el talle 42 tiene stock 0, se bloquea la transacción.
                       </p>
                     </div>
                     
                     <div className="w-full md:w-2/3 h-[350px] flex items-center justify-center gap-6">
-                      
-                      {/* Antes (Excel) */}
                       <div className="w-48 bg-white border border-slate-200 rounded-xl shadow-sm overflow-hidden opacity-70">
                         <div className="bg-slate-100 border-b border-slate-200 px-3 py-2 text-[10px] font-bold text-slate-600 flex items-center gap-2">
-                          <FileSpreadsheet className="w-3 h-3"/> inventario.csv
+                          <FileSpreadsheet className="w-3 h-3"/> inv_invierno.csv
                         </div>
                         <div className="p-3 font-mono text-[9px] text-slate-500 space-y-2">
-                          <div className="border-b border-slate-100 pb-1 flex justify-between"><span>Remera Azul</span><span>$15.000</span></div>
-                          <div className="border-b border-slate-100 pb-1 flex justify-between text-red-500 bg-red-50"><span>Jean roto</span><span>???</span></div>
+                          <div className="border-b border-slate-100 pb-1 flex justify-between"><span>Buzo Over L</span><span>$25k</span></div>
+                          <div className="border-b border-slate-100 pb-1 flex justify-between text-red-500 bg-red-50"><span>Jean Mom 40</span><span>Agotado</span></div>
                         </div>
                       </div>
 
                       <ArrowRight className="w-8 h-8 text-emerald-500 shrink-0" />
 
-                      {/* Después (Supabase) */}
                       <div className="w-56 bg-slate-900 border border-emerald-500/30 rounded-xl shadow-2xl overflow-hidden relative">
                         <div className="absolute top-0 right-0 bg-emerald-500 text-white text-[8px] font-bold px-2 py-1 rounded-bl-lg">ACID SYNC</div>
                         <div className="bg-slate-800 border-b border-slate-700 px-3 py-2 text-[10px] font-bold text-emerald-400 flex items-center gap-2">
-                          <Database className="w-3 h-3"/> public.productos
+                          <Database className="w-3 h-3"/> public.indumentaria
                         </div>
                         <div className="p-4 space-y-3 font-mono text-[10px] text-slate-300">
                           <div className="border-b border-slate-700 pb-1 flex justify-between items-center">
-                            <span>remera_azul</span><span className="bg-emerald-900/50 text-emerald-400 px-1 rounded">Stock: 5</span>
+                            <span>buzo_over_L</span><span className="bg-emerald-900/50 text-emerald-400 px-1 rounded">Stock: 5</span>
                           </div>
                           <div className="border-b border-slate-700 pb-1 flex justify-between items-center">
-                            <span className="text-slate-500">jean</span><span className="bg-red-900/50 text-red-400 px-1 rounded font-bold">BLOCK (0)</span>
+                            <span className="text-slate-500">jean_mom_40</span><span className="bg-red-900/50 text-red-400 px-1 rounded font-bold">BLOCK (0)</span>
                           </div>
                         </div>
                       </div>
-
                     </div>
                   </div>
                 )}
 
-                {/* SLIDE 3: LANGGRAPH (DIAGRAMA ORTOGONAL LIMPIO) */}
+                {/* SLIDE 3: LANGGRAPH */}
                 {activeTab === 3 && (
                   <div className="w-full flex flex-col md:flex-row items-center gap-12 max-w-5xl">
                     <div className="w-full md:w-1/3 bg-white/80 backdrop-blur p-6 rounded-2xl border border-slate-100 shadow-sm z-20">
-                      <h3 className="text-2xl font-bold text-slate-900 mb-4">Enrutamiento ReAct</h3>
+                      <h3 className="text-2xl font-bold text-slate-900 mb-4">El Vendedor Digital</h3>
                       <p className="text-slate-600 text-sm leading-relaxed">
-                        No usamos un chat lineal. Construimos grafos de estado. El agente "piensa", blinda la intención del usuario y decide con qué herramienta de base de datos interactuar para cerrar la venta.
+                        Construimos grafos de estado. El agente entiende cuando el cliente está averiguando ("tenés camperas?") y cuándo está cerrando la compra ("pasame link de la negra M").
                       </p>
                     </div>
                     
-                    {/* Lienzo de Nodos Fijo y Perfecto */}
                     <div className="w-full md:w-2/3 h-[350px] relative flex items-center justify-center">
-                      
-                      {/* Contenedor de medidas absolutas para que las líneas SVG jamás se rompan */}
                       <div className="relative w-[550px] h-[300px]">
-                        
-                        {/* Conectores Ortogonales SVG */}
                         <svg className="absolute inset-0 w-full h-full pointer-events-none" viewBox="0 0 550 300">
-                          {/* Input to Router */}
                           <path d="M 120 150 L 200 150" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeDasharray="4 4" />
                           <motion.circle r="3" fill="#3b82f6" animate={{ cx: [120, 200] }} transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }} cy="150" />
                           
-                          {/* Router to Tools (Routing Ortogonal) */}
-                          <path d="M 360 150 L 390 150 L 390 65 L 410 65" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeLinejoin="round" />
-                          <path d="M 360 150 L 410 150" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinejoin="round" />
+                          <path d="M 360 150 L 390 150 L 390 65 L 410 65" fill="none" stroke="#3b82f6" strokeWidth="2" strokeLinejoin="round" />
+                          <path d="M 360 150 L 410 150" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeLinejoin="round" />
                           <path d="M 360 150 L 390 150 L 390 235 L 410 235" fill="none" stroke="#cbd5e1" strokeWidth="2" strokeLinejoin="round" />
 
-                          {/* Partícula activa */}
-                          <motion.circle r="3" fill="#3b82f6" animate={{ offsetDistance: ["0%", "100%"] }} transition={{ duration: 1, repeat: Infinity, ease: "linear", delay: 0.5 }} style={{ offsetPath: "path('M 360 150 L 410 150')" }} />
+                          <motion.circle r="3" fill="#3b82f6" animate={{ offsetDistance: ["0%", "100%"] }} transition={{ duration: 1, repeat: Infinity, ease: "linear", delay: 0.5 }} style={{ offsetPath: "path('M 360 150 L 390 150 L 390 65 L 410 65')" }} />
                         </svg>
 
-                        {/* Nodo 1: Input */}
                         <div className="absolute left-[20px] top-[125px] w-[100px] h-[50px] bg-white border border-slate-200 rounded-lg shadow-sm flex flex-col justify-center items-center">
                           <div className="flex items-center gap-1 text-[9px] font-bold text-slate-500 mb-1">
-                            <ShieldCheck className="w-3 h-3 text-emerald-500" /> Input User
+                            <ShieldCheck className="w-3 h-3 text-emerald-500" /> WhatsApp
                           </div>
+                          <span className="text-[8px] italic text-slate-400">"Quiero la negra M"</span>
                         </div>
 
-                        {/* Nodo 2: Router */}
                         <div className="absolute left-[200px] top-[110px] w-[160px] h-[80px] bg-white border-2 border-blue-500 rounded-xl shadow-lg flex flex-col justify-center items-center">
                           <img src={LOGOS.langgraph} alt="LangGraph" className="w-5 h-5 mb-2 grayscale" />
-                          <span className="text-[10px] font-bold text-blue-700 tracking-wide uppercase">ReAct Agent Router</span>
-                          <span className="text-[8px] text-slate-400 mt-1">Evaluando intención...</span>
+                          <span className="text-[10px] font-bold text-blue-700 tracking-wide uppercase">ReAct Agent</span>
+                          <span className="text-[8px] text-slate-400 mt-1">Detectando intención...</span>
                         </div>
 
-                        {/* Nodo 3: Tool Top */}
-                        <div className="absolute left-[410px] top-[40px] w-[140px] h-[50px] bg-white border border-slate-200 rounded-lg shadow-sm flex flex-col justify-center px-3 opacity-60">
-                          <span className="text-[9px] font-bold text-slate-500 font-mono">1. asistencia_humana()</span>
-                        </div>
-
-                        {/* Nodo 4: Tool Mid (Active) */}
-                        <div className="absolute left-[410px] top-[125px] w-[140px] h-[50px] bg-blue-50 border-2 border-blue-400 rounded-lg shadow-md flex items-center justify-between px-3">
-                          <span className="text-[9px] font-bold text-blue-700 font-mono">2. consultar_db()</span>
+                        <div className="absolute left-[410px] top-[40px] w-[140px] h-[50px] bg-blue-50 border-2 border-blue-400 rounded-lg shadow-md flex items-center justify-between px-3">
+                          <span className="text-[9px] font-bold text-blue-700 font-mono">consultar_talles()</span>
                           <motion.div animate={{ scale: [1, 1.3, 1] }} transition={{ duration: 1.5, repeat: Infinity }} className="w-2 h-2 bg-blue-500 rounded-full" />
                         </div>
 
-                        {/* Nodo 5: Tool Bot */}
-                        <div className="absolute left-[410px] top-[210px] w-[140px] h-[50px] bg-white border border-slate-200 rounded-lg shadow-sm flex flex-col justify-center px-3 opacity-60">
-                          <span className="text-[9px] font-bold text-slate-500 font-mono">3. generar_link()</span>
+                        <div className="absolute left-[410px] top-[125px] w-[140px] h-[50px] bg-white border border-slate-200 rounded-lg shadow-sm flex flex-col justify-center px-3 opacity-60">
+                          <span className="text-[9px] font-bold text-slate-500 font-mono">generar_link_pago()</span>
                         </div>
 
+                        <div className="absolute left-[410px] top-[210px] w-[140px] h-[50px] bg-white border border-slate-200 rounded-lg shadow-sm flex flex-col justify-center px-3 opacity-60">
+                          <span className="text-[9px] font-bold text-slate-500 font-mono">asistencia_humana()</span>
+                        </div>
                       </div>
-
                     </div>
                   </div>
                 )}
@@ -453,33 +707,38 @@ export default function ComoFuncionaPage() {
         </div>
       </section>
 
-
       {/* ==========================================
           3. CTA FINAL (VOICEFLOW ENTERPRISE STYLE)
           ========================================== */}
       <section className="bg-[#18181b] pt-24 border-t border-slate-200 relative overflow-hidden flex flex-col">
         
-        {/* Upper part: Header CTA */}
         <div className="max-w-7xl mx-auto px-6 w-full mb-16 relative z-10">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-6  tracking-tight">
-              Diseñado para precisión y escala comercial
+          <motion.div 
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="max-w-3xl"
+          >
+            <span className="text-[#FF5C35] font-semibold text-sm tracking-wide mb-4 block">
+              E-commerce Autónomo
+            </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-serif text-white mb-6 tracking-tight">
+              Diseñado para escalar tu tienda de ropa
             </h2>
-            <p className="text-slate-400 text-lg  mb-8 max-w-2xl leading-relaxed">
-              ClapWise ayuda a negocios y equipos de e-commerce a construir, desplegar y gestionar agentes de IA conversacionales de forma segura, determinista y a gran escala.
+            <p className="text-slate-400 text-lg mb-8 max-w-2xl leading-relaxed">
+              ClapWise ayuda a marcas de indumentaria a despachar pedidos 24/7 de forma segura, resolviendo las consultas de stock, talles y envíos por WhatsApp e Instagram.
             </p>
             <a href="https://calendly.com/TU-ENLACE-REAL" target="_blank" rel="noopener noreferrer" className="inline-block">
-              <button className="bg-[#F3F4F6] text-[#18181b] hover:bg-[#427AA1] font-medium px-6 py-3 rounded-full transition-colors flex items-center gap-2">
-                Agendar evaluación técnica <ArrowRight className="w-4 h-4" />
+              <button className="bg-[#3B82F6] hover:bg-blue-600 text-white font-medium px-6 py-3 rounded-full transition-colors flex items-center gap-2">
+                Agendar integración con tu tienda <ArrowRight className="w-4 h-4" />
               </button>
             </a>
-          </div>
+          </motion.div>
         </div>
 
-        {/* Lower part: Feature Grid with faint waves */}
         <div className="border-t border-white/10 relative bg-[#13151A] flex-1">
           
-          {/* Faint Background Waves (SVG) */}
           <div className="absolute inset-x-0 top-0 h-48 overflow-hidden pointer-events-none opacity-20">
             <svg viewBox="0 0 1000 300" preserveAspectRatio="none" className="w-full h-full">
               <path d="M0,300 C300,100 700,100 1000,300" fill="none" stroke="#94a3b8" strokeWidth="1" />
@@ -490,45 +749,52 @@ export default function ComoFuncionaPage() {
           </div>
 
           <div className="max-w-7xl mx-auto relative z-10 border-x border-white/10">
-            {/* Grid structure matching the image: 4 columns, separated by thin borders */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 divide-y md:divide-y-0 md:divide-x divide-white/10">
               
-              {/* Feature 1 */}
-              <div className="p-8 lg:p-10 hover:bg-white/[0.02] transition-colors">
-                <h4 className="text-white font-bold text-sm mb-3">Protección de marca</h4>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.1 }}
+                className="p-8 lg:p-10 hover:bg-white/[0.02] transition-colors"
+              >
+                <h4 className="text-white font-bold text-sm mb-3">Protección de reputación</h4>
                 <p className="text-slate-400 text-sm leading-relaxed">
-                  Aislamos al agente de prompts maliciosos. Construí un ecosistema donde tu reputación y tus precios están 100% blindados de forma centralizada.
+                  Aislamos al agente. Tu negocio nunca más ofrecerá descuentos inventados ni confirmará prendas agotadas.
                 </p>
-              </div>
+              </motion.div>
               
-              {/* Feature 2 */}
-              <div className="p-8 lg:p-10 hover:bg-white/[0.02] transition-colors">
-                <h4 className="text-white font-bold text-sm mb-3">Despliegue inmediato</h4>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.2 }}
+                className="p-8 lg:p-10 hover:bg-white/[0.02] transition-colors"
+              >
+                <h4 className="text-white font-bold text-sm mb-3">Ingesta de PDFs y Excels</h4>
                 <p className="text-slate-400 text-sm leading-relaxed">
-                  Acelerá tu salida al mercado. Ingesta automatizada de catálogos caóticos para escalar eficientemente hacia nuevos casos de uso.
+                  ¿Tu proveedor te manda un PDF desordenado? Lo subís a ClapWise y en segundos está estructurado para vender.
                 </p>
-              </div>
+              </motion.div>
               
-              {/* Feature 3 */}
-              <div className="p-8 lg:p-10 hover:bg-white/[0.02] transition-colors">
-                <h4 className="text-white font-bold text-sm mb-3">Agnóstico y modular</h4>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.3 }}
+                className="p-8 lg:p-10 hover:bg-white/[0.02] transition-colors"
+              >
+                <h4 className="text-white font-bold text-sm mb-3">Ventas Omnicanal</h4>
                 <p className="text-slate-400 text-sm leading-relaxed">
-                  Apostá por la IA, no por un único proveedor. Adaptamos los LLMs a la tecnología que mejor funcione para el volumen de tu negocio.
+                  Un solo cerebro centralizado. El mismo agente atiende tus DMs de Instagram y tus mensajes de WhatsApp al instante.
                 </p>
-              </div>
+              </motion.div>
 
-              {/* Feature 4 */}
-              <div className="p-8 lg:p-10 hover:bg-white/[0.02] transition-colors">
-                <h4 className="text-white font-bold text-sm mb-3">Orquestación auditable</h4>
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.5, delay: 0.4 }}
+                className="p-8 lg:p-10 hover:bg-white/[0.02] transition-colors"
+              >
+                <h4 className="text-white font-bold text-sm mb-3">Derivación humana</h4>
                 <p className="text-slate-400 text-sm leading-relaxed">
-                  No es una caja negra. Monitoreá cada decisión del agente gracias a nuestro diseño de grafos de estado con guardrails estrictos.
+                  El agente sabe cuándo retirarse. Si un cliente hace una queja compleja, pausa la automatización y te avisa.
                 </p>
-              </div>
+              </motion.div>
 
             </div>
           </div>
         </div>
-      </section> 
+      </section>
 
       <Footer />
     </main>

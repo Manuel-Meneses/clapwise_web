@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react"
 import { motion } from "framer-motion"
-import { Check, ArrowRight, Calendar } from "lucide-react"
+import { Check, Calendar, ArrowRight } from "lucide-react"
 import { Button } from "./ui/button"
 
 // URLs de los logos reales (Podés cambiarlos por rutas locales como "/logos/python.svg" luego)
@@ -53,138 +53,83 @@ export default function PricingSection() {
         </div>
 
         {/* ==========================================
-            2. CABECERA DE PRECIOS
+            2. CABECERA DE SOLUCIONES
             ========================================== */}
         <div className="text-center mb-16 max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-5xl font-serif font-bold tracking-tight mb-4 text-[#192832]">
-            Inversión clara. <br/> <span className="text-[#427AA1]">Retorno inmediato.</span>
+            Soluciones a medida. <br/> <span className="text-[#427AA1]">Resultados reales.</span>
           </h2>
           <p className="text-gray-500 text-lg">
-            Modelo de suscripción híbrido. Pagás una única vez por la integración de tu base de datos, y luego una suscripción mensual fija.
+            Analizamos las necesidades de tu negocio, integramos tu base de datos y diseñamos una infraestructura conversacional escalable.
           </p>
         </div>
 
         {/* ==========================================
-            3. TARJETAS DE PRECIOS
+            3. TARJETA UNIFICADA (SERVICIO INTEGRAL)
             ========================================== */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto mb-20">
-          
-          {/* PLAN STARTER */}
+        <div className="max-w-5xl mx-auto mb-20">
           <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="bg-white rounded-3xl border border-gray-200 shadow-sm hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col group relative"
+            className="bg-[#00324D] rounded-3xl border border-[#427AA1]/30 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col md:flex-row group"
           >
-            {/* ESPACIO PARA FOTO STARTER */}
-            <div className="w-full aspect-[4/3] bg-gray-100 relative overflow-hidden">
-              <img 
-                src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?q=80&w=800&auto=format&fit=crop" 
-                alt="Plan Starter - Cafeterías y Negocios Locales" 
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" 
-              />
-            </div>
-
-            <div className="p-8 flex flex-col flex-1">
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Plan Starter</h3>
-              <p className="text-sm text-gray-500 mb-6 pb-6 border-b border-gray-100">
-                Para negocios locales con catálogos concisos que buscan automatizar la atención y agendar turnos.
-              </p>
-
-              {/* Bloque de Precios */}
-              <div className="mb-6 space-y-2">
-                <div className="flex items-end gap-2">
-                  <span className="text-4xl font-extrabold text-[#00324D]">$30</span>
-                  <span className="text-sm text-gray-500 font-medium mb-1">USD / mes</span>
-                </div>
-                <div className="inline-block bg-blue-50 text-[#427AA1] text-xs font-semibold px-2 py-1 rounded">
-                  + Setup único de $50 USD
-                </div>
-              </div>
-
-              <ul className="space-y-4 mb-8 flex-1">
-                {['Catálogos de hasta 100 productos', 'Setup automatizado desde Excel', 'Agendamiento de turnos', 'Respuestas a preguntas frecuentes'].map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm text-gray-600 font-medium">
-                    <Check className="w-5 h-5 text-[#427AA1] shrink-0" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-
-              {/* Integración Calendario / Meet */}
-              <a href="https://calendly.com/clapwise/30min" target="_blank" rel="noopener noreferrer" className="w-full">
-                <Button className="w-full h-12 bg-white text-[#00324D] border-2 border-gray-200 hover:bg-gray-50 hover:border-gray-300 font-bold rounded-xl transition-all flex items-center justify-center gap-2">
-                  <Calendar className="w-4 h-4" /> Agendar reunión por Meet
-                </Button>
-              </a>
-            </div>
-          </motion.div>
-
-          {/* PLAN PRO */}
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.1 }}
-            className="bg-[#00324D] rounded-3xl border border-[#427AA1]/30 shadow-xl hover:shadow-2xl transition-all duration-300 overflow-hidden flex flex-col group relative"
-          >
-            {/* ESPACIO PARA FOTO PRO */}
-            <div className="w-full aspect-[4/3] bg-gray-900 relative overflow-hidden">
+            {/* ESPACIO PARA FOTO (Lado izquierdo en desktop) */}
+            <div className="w-full md:w-2/5 aspect-[4/3] md:aspect-auto bg-gray-900 relative overflow-hidden">
               <img 
                 src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=800&auto=format&fit=crop" 
-                alt="Plan Pro - Ecommerce y Ropa" 
+                alt="Infraestructura y Soluciones" 
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90" 
               />
             </div>
 
-            <div className="p-8 flex flex-col flex-1">
-              <h3 className="text-2xl font-bold text-white mb-2">Plan Pro</h3>
-              <p className="text-sm text-white/60 mb-6 pb-6 border-b border-white/10">
-                Infraestructura completa para catálogos dinámicos y control estricto de stock en tiempo real.
+            {/* CONTENIDO (Lado derecho en desktop) */}
+            <div className="p-8 md:p-12 flex flex-col flex-1 justify-center relative">
+              <h3 className="text-3xl font-bold text-white mb-4">Servicio Integral</h3>
+              <p className="text-white/70 mb-8 text-lg border-b border-white/10 pb-8">
+                Desde negocios locales con catálogos concisos hasta tiendas de alto volumen con estricto control de stock en tiempo real. Construimos lo que tu negocio realmente necesita.
               </p>
 
-              {/* Bloque de Precios */}
-              <div className="mb-6 space-y-2">
-                <div className="flex items-end gap-2">
-                  <span className="text-4xl font-extrabold text-white">$90</span>
-                  <span className="text-sm text-white/60 font-medium mb-1">USD / mes</span>
-                </div>
-                <div className="inline-block bg-[#427AA1]/20 border border-[#427AA1]/50 text-blue-200 text-xs font-semibold px-2 py-1 rounded">
-                  + Setup único de $150 USD
-                </div>
-              </div>
-
-              <ul className="space-y-4 mb-8 flex-1">
-                {['Inventario de hasta 5.000 productos', 'Búsqueda vectorial HNSW en vivo', 'Prevención de sobreventas (ACID)', 'Soporte prioritario y orquestación'].map((feature, idx) => (
-                  <li key={idx} className="flex items-start gap-3 text-sm text-white/80 font-medium">
+              {/* Lista unificada de características */}
+              <ul className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-5 mb-10 flex-1">
+                {[
+                  'Catálogos dinámicos escalables', 
+                  'Setup automatizado (Excel/ERP)', 
+                  'Búsqueda vectorial HNSW en vivo', 
+                  'Prevención de sobreventas (ACID)',
+                  'Agendamiento de turnos',
+                  'Soporte prioritario y orquestación'
+                ].map((feature, idx) => (
+                  <li key={idx} className="flex items-start gap-3 text-sm text-white/90 font-medium">
                     <Check className="w-5 h-5 text-[#427AA1] shrink-0" />
                     <span>{feature}</span>
                   </li>
                 ))}
               </ul>
 
-              {/* Integración Calendario / Meet */}
-              <a href="https://calendly.com/clapwise/30min" target="_blank" rel="noopener noreferrer" className="w-full">
-                <Button className="w-full h-12 bg-[#427AA1] text-white hover:bg-blue-600 font-bold rounded-xl border-none transition-all shadow-[0_0_20px_rgba(66,122,161,0.3)] flex items-center justify-center gap-2">
-                  <Calendar className="w-4 h-4" /> Agendar demostración
-                </Button>
-              </a>
+              {/* Botón de Agendamiento Principal */}
+              <div className="mt-auto">
+                <a href="https://calendly.com/clapwise/30min" target="_blank" rel="noopener noreferrer" className="block w-full sm:w-auto">
+                  <Button className="w-full sm:w-auto h-14 px-8 bg-[#427AA1] text-white hover:bg-blue-600 font-bold rounded-xl border-none transition-all shadow-[0_0_20px_rgba(66,122,161,0.3)] flex items-center justify-center gap-3 text-base">
+                    <Calendar className="w-5 h-5" /> Agendar evaluación técnica por Meet
+                  </Button>
+                </a>
+              </div>
             </div>
           </motion.div>
-
         </div>
 
         {/* ==========================================
-            4. CTA MINIMALISTA Y FUNCIONAL
+            4. CTA SECUNDARIO (OPCIONAL)
             ========================================== */}
-        <div className="max-w-3xl mx-auto text-center border-t border-gray-100 pt-16">
-          <h3 className="text-2xl font-bold text-gray-900 mb-4">¿Tenés un caso de uso particular?</h3>
-          <p className="text-gray-500 mb-8">
-            Podemos armar flujos personalizados para mayoristas, integraciones con ERPs específicos o tiendas de altísimo volumen.
+        <div className="max-w-3xl mx-auto text-center border-t border-gray-100 pt-12">
+          <h3 className="text-xl font-bold text-gray-900 mb-2">¿Dudas antes de la reunión?</h3>
+          <p className="text-gray-500 mb-6">
+            Prepará tu lista de requerimientos, integraciones específicas o volúmenes de tienda para que podamos asesorarte con precisión.
           </p>
-          <a href="https://calendly.com/tu-usuario" target="_blank" rel="noopener noreferrer">
-            <button className="inline-flex items-center gap-2 h-12 px-6 text-[#427AA1] font-semibold hover:bg-blue-50 rounded-full transition-colors group">
-              Agendar llamada técnica de evaluación <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          <a href="https://calendly.com/clapwise/30min" target="_blank" rel="noopener noreferrer">
+            <button className="inline-flex items-center gap-2 text-[#427AA1] font-semibold hover:text-blue-800 transition-colors group">
+              Ir al calendario <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </button>
           </a>
         </div>

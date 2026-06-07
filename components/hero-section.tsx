@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react"
 import { AnimatedText } from "./animated-text"
 import { ArrowUpRight, ArrowRight } from "lucide-react"
+import { AiParticles } from "./ai-particles"
 
 export default function HeroSection() {
   const [isVisible, setIsVisible] = useState(false)
@@ -66,24 +67,9 @@ export default function HeroSection() {
         </div>
 
         {/* 2. VIDEO DEMOSTRACIÓN (Encuadre reducido y apaisado) */}
-        <div className={`w-full max-w-5xl will-change-transform transition-all duration-[1500ms] ease-out delay-500 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-24"}`}>
-          
-          <div className="relative w-full aspect-[16/9] md:aspect-[21/9] bg-secondary rounded-2xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.08)] border border-border/60">
-            
-            {/* Overlay para darle un efecto más integrado */}
-            <div className="absolute inset-0 border border-black/10 rounded-2xl z-10 pointer-events-none" />
-            
-            <video 
-              autoPlay 
-              loop 
-              muted 
-              playsInline 
-              className="w-full h-full object-cover relative z-0" 
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/af7687fd-f2ad-4f2a-96f0-b56fa7d3769c-08wERpo5U1sktxs1vcRsJW9ueslNZv.mp4" 
-            />
-          </div>
-          
-        </div>
+       <div className="w-full max-w-4xl mx-auto mt-12">
+        <AiParticles />
+      </div> 
 
       </div>
     </section>

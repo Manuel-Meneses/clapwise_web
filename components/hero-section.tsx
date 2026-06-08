@@ -120,13 +120,13 @@ export default function HeroSection() {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
-              <a href="#demo" className="group flex items-center bg-[#427AA1] text-white rounded-full pl-6 pr-2 py-2 transition-all hover:bg-[#316285]">
+              <a href="https://calendly.com/clapwise/30min" className="group flex items-center bg-[#427AA1] text-white rounded-full pl-6 pr-2 py-2 transition-all hover:bg-[#316285]">
                 <span className="text-sm font-semibold tracking-wide mr-4">Escribir al Agente</span>
                 <span className="w-8 h-8 bg-white text-[#427AA1] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform">
                   <ArrowUpRight className="w-4 h-4" />
                 </span>
               </a>
-              <a href="#docs" className="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors px-6 py-3">
+              <a href="/como-funciona" className="group flex items-center gap-2 text-gray-300 hover:text-white transition-colors px-6 py-3">
                 <span className="text-sm font-medium">Ver arquitectura</span>
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>

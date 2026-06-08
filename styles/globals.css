@@ -33,3 +33,7 @@
 .bg-glow {
   background: radial-gradient(circle at 50% 0%, rgba(124, 58, 237, 0.15) 0%, transparent 50%);
 }
+
+body {
+  font-family: var(--font-manrope);
+}

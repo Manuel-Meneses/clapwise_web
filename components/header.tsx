@@ -6,70 +6,61 @@ import { Menu, X, ArrowUpRight } from "lucide-react"
 export function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [theme, setTheme] = useState("light")
 
-  // Controla el fondo del header al scrollear
+  // Scroll effect
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20)
-    }
+    const handleScroll = () => setScrolled(window.scrollY > 20)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
 
-  // Bloquea el scroll cuando el menú móvil está abierto
+  // Theme listener
   useEffect(() => {
-    if (isOpen) {
-      document.body.style.overflow = "hidden"
-    } else {
-      document.body.style.overflow = "unset"
-    }
-  }, [isOpen])
+    const handleThemeChange = (e: any) => setTheme(e.detail.theme)
+    window.addEventListener("header-theme", handleThemeChange)
+    return () => window.removeEventListener("header-theme", handleThemeChange)
+  }, [])
+
+  // Estilos dinámicos solo para el Header visible
+  const textColor = theme === "dark" && !scrolled ? "text-[#F3F4F6]" : "text-[#4C4B4B]"
+  const logoFilter = theme === "dark" && !scrolled ? "brightness(0) invert(1)" : "brightness(1) invert(0)"
+  const burgerColor = theme === "dark" && !scrolled ? "text-white" : "text-[#192832]"
 
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
     e.preventDefault()
     const element = document.getElementById(id)
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" })
-    }
+    if (element) element.scrollIntoView({ behavior: "smooth" })
     setIsOpen(false)
   }
 
-  const menuItems = ['El Agente', 'Infraestructura', 'Precios']
+  const menuItems = ['cómo funciona']
 
   return (
-    <header className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300 ${scrolled ? "bg-white/90 backdrop-blur-md border-b border-gray-100 shadow-sm" : "bg-transparent"}`}>
-      
-      {/* BARRA SUPERIOR - DISEÑO ORIGINAL INTACTO */}
-      <div className="max-w-6xl mx-auto px-4 md:px-6 h-16 md:h-20 flex items-center justify-between relative z-50">
+    <header 
+      className={`fixed z-50 transition-all duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] ${
+        scrolled 
+          ? "top-4 left-4 right-4 md:left-[10%] md:right-[10%] rounded-full bg-white/80 backdrop-blur-xl border border-white/20 shadow-xl" 
+          : "top-0 left-0 w-full rounded-none bg-transparent"
+      }`}
+    >
+      <div className={`max-w-6xl mx-auto px-6 flex items-center justify-between transition-all duration-500 ${scrolled ? "h-16" : "h-20"}`}>
         
-        {/* Logo */}
         <a href="/" className="flex items-center gap-2">
-          <img src="/logo_web.svg" alt="ClapWise" className="h-16 w-auto object-contain" />
+          <img src="/logo_web.svg" alt="ClapWise" className={`transition-all duration-500 ${scrolled ? "h-14" : "h-16"} w-auto object-contain`} style={{ filter: logoFilter }} />
         </a>
 
-        {/* NAVEGACIÓN CENTRAL (Diseño Original Exacto) */}
-        <nav className="hidden md:flex items-center gap-10">
+        {/* NAVEGACIÓN DESKTOP */}
+        <nav className="hidden md:flex items-center gap-8">
           {menuItems.map((item) => {
-            // Excepción para que "El Agente" vaya a la nueva página
-            if (item === 'El Agente') {
-              return (
-                <a
-                  key={item}
-                  href="/como-funciona"
-                  className="text-sm font-medium text-[#4C4B4B] hover:text-[#427AA1] transition-colors cursor-pointer"
-                >
-                  {item}
-                </a>
-              )
-            }
-            
-            const targetId = item === 'Infraestructura' ? 'features' : item.toLowerCase().replace(' ', '-')
+            const isAgente = item === 'cómo funciona'
+            const targetId = item === 'soluciones' ? 'solutions' : item.toLowerCase().replace(' ', '-')
             return (
               <a
                 key={item}
-                href={`#${targetId}`}
-                onClick={(e) => handleSmoothScroll(e, targetId)}
-                className="text-sm font-medium text-[#4C4B4B] hover:text-[#427AA1] transition-colors cursor-pointer"
+                href={isAgente ? "/como-funciona" : `#${targetId}`}
+                onClick={(e) => !isAgente && handleSmoothScroll(e, targetId)}
+                className={`text-sm font-medium transition-colors duration-500 ${textColor} hover:text-[#427AA1]`}
               >
                 {item}
               </a>
@@ -77,24 +68,15 @@ export function Header() {
           })}
         </nav>
 
-        {/* BOTÓN CTA ORIGINAL (Actualizado a tag <a> para el link a Calendly) */}
-        <div className="hidden md:flex items-center gap-1">
-          <a 
-            href="https://calendly.com/clapwise/30min" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="relative flex items-center justify-center gap-2 bg-[#427AA1] text-white rounded-full pl-5 pr-1.5 py-1.5 transition-all duration-300 group overflow-hidden hover:bg-[#00324D] hover:shadow-md"
-          >
-            <span className="text-sm font-semibold tracking-wide">Iniciar Prueba</span>
-            <span className="w-7 h-7 bg-white rounded-full flex items-center justify-center transition-transform group-hover:scale-105">
-              <ArrowUpRight className="w-3.5 h-3.5 text-[#427AA1] group-hover:text-[#00324D] transition-colors" />
-            </span>
+        <div className="hidden md:flex items-center">
+          <a href="https://calendly.com/clapwise/30min" target="_blank" rel="noopener noreferrer" className="relative flex items-center justify-center gap-2 bg-[#427AA1] text-white rounded-full px-5 py-2 transition-all duration-300 hover:bg-[#00324D]">
+            <span className="text-sm font-semibold">Iniciar Prueba</span>
           </a>
         </div>
 
-        {/* BOTÓN MENÚ HAMBURGUESA MÓVIL */}
+        {/* BOTÓN MÓVIL (Hamburguesa dinámica) */}
         <button 
-          className="md:hidden relative p-2 text-[#192832]" 
+          className={`md:hidden p-2 transition-colors ${burgerColor}`} 
           onClick={() => setIsOpen(!isOpen)}
           aria-label="Alternar menú"
         >
@@ -102,57 +84,48 @@ export function Header() {
         </button>
       </div>
 
-      {/* OVERLAY MÓVIL REPARADO: Plano, rectangular, sin bordes circulares */}
+      {/* MENÚ MÓVIL FLOTANTE: Estilo dropdown premium (glassmorphism) */}
       <div 
-        className={`fixed top-0 left-0 w-full h-screen bg-white z-40 flex flex-col pt-24 px-6 transition-transform duration-300 ease-in-out md:hidden rounded-none ${
-          isOpen ? "translate-y-0" : "-translate-y-full"
+        className={`absolute top-full left-0 w-full px-2 transition-all duration-300 ease-[cubic-bezier(0.16,1,0.3,1)] md:hidden ${
+          isOpen ? "opacity-100 translate-y-2 pointer-events-auto" : "opacity-0 -translate-y-4 pointer-events-none"
         }`}
       >
-        <nav className="flex flex-col gap-2">
-          {menuItems.map((item) => {
-            if (item === 'El Agente') {
+        <div className="bg-white/95 backdrop-blur-xl border border-gray-200/50 shadow-2xl rounded-3xl p-6 flex flex-col gap-2">
+          <nav className="flex flex-col">
+            {menuItems.map((item) => {
+              const isAgente = item === 'cómo funciona'
+              const targetId = item === 'soluciones' ? 'solutions' : item.toLowerCase().replace(' ', '-')
               return (
                 <a
                   key={item}
-                  href="/como-funciona"
-                  onClick={() => setIsOpen(false)}
-                  className="text-xl font-bold text-[#192832] py-4 border-b border-gray-100 flex justify-between items-center"
+                  href={isAgente ? "/como-funciona" : `#${targetId}`}
+                  onClick={(e) => {
+                    if (!isAgente) handleSmoothScroll(e, targetId)
+                    setIsOpen(false)
+                  }}
+                  className="text-lg font-bold text-[#192832] py-4 border-b border-gray-100 flex justify-between items-center hover:text-[#427AA1] transition-colors"
                 >
                   {item}
-                  <ArrowUpRight className="w-5 h-5 text-gray-300" />
+                  <ArrowUpRight className="w-4 h-4 text-gray-400" />
                 </a>
               )
-            }
-            const targetId = item.toLowerCase().replace(' ', '-')
-            return (
-              <a
-                key={item}
-                href={`#${targetId}`}
-                onClick={(e) => handleSmoothScroll(e, targetId)}
-                className="text-xl font-bold text-[#192832] py-4 border-b border-gray-100 flex justify-between items-center"
-              >
-                {item}
-                <ArrowUpRight className="w-5 h-5 text-gray-300" />
-              </a>
-            )
-          })}
-        </nav>
+            })}
+          </nav>
 
-        {/* CTA MÓVIL */}
-        <div className="mt-8">
-          <a 
-            href="https://calendly.com/TU-ENLACE-REAL" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            onClick={() => setIsOpen(false)}
-            className="flex items-center justify-center gap-2 w-full bg-[#427AA1] text-white rounded-lg py-4 font-semibold hover:bg-[#00324D] shadow-sm transition-all"
-          >
-            <span>Iniciar Prueba</span>
-            <ArrowUpRight className="w-5 h-5" />
-          </a>
+          <div className="mt-4">
+            <a 
+              href="https://calendly.com/clapwise/30min" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              onClick={() => setIsOpen(false)}
+              className="flex items-center justify-center gap-2 w-full bg-[#427AA1] text-white rounded-full py-3.5 font-semibold hover:bg-[#00324D] transition-colors shadow-sm"
+            >
+              <span>Iniciar Prueba</span>
+              <ArrowUpRight className="w-4 h-4" />
+            </a>
+          </div>
         </div>
       </div>
-      
     </header>
   )
 }

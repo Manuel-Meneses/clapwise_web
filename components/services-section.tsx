@@ -1,130 +1,85 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
-import { MapPin, Mic, Brain, Workflow } from "lucide-react"
+import dynamic from "next/dynamic";
 
-  export default function ServicesSection() {
-  const [isMounted, setIsMounted] = useState(false)
+// IMPORTACIÓN DINÁMICA: Le decimos a Next.js que apague el SSR para este componente
+const HumanoidCanvas = dynamic(
+  () => import("@/components/humanoid-particles").then((mod) => mod.HumanoidCanvas),
+  { 
+    ssr: false,
+    loading: () => (
+      // Un loader elegante mientras el motor 3D arranca
+      <div className="w-full h-[900px] flex items-center justify-center">
+        <div className="w-8 h-8 border-4 border-gray-300 border-t-gray-900 rounded-full animate-spin"></div>
+      </div>
+    )
+  }
+);
 
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  if (!isMounted) return null
-
+export default function FeatureSection() {
   return (
-    <section className="py-16 md:py-24 bg-background relative overflow-hidden">
-      <div className="container mx-auto px-4 md:px-6 max-w-6xl">
+    <section className="w-full bg-[#F3F4F6] py-24 px-6 md:px-12 lg:px-24 font-['Manrope',sans-serif] overflow-hidden">
+      
+      {/* Título Central */}
+      <div className="max-w-4xl mx-auto text-center mb-16">
+        <h2 className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight leading-tight">
+          Infraestructura IA que <br className="hidden md:block" /> 
+          cierra ventas mientras <br className="hidden md:block" /> 
+          tu equipo descansa.
+        </h2>
+      </div>
+
+      {/* Grilla Principal */}
+      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-8 items-center">
         
-        {/* CABECERA */}
-        <div className="mb-16 md:mb-24 text-center max-w-3xl mx-auto">
-          <h2 className="text-3xl md:text-5xl font-extrabold mb-4 tracking-tight text-foreground">
-            Empatía e <span className="text-[#427AA1]">hiper-localización.</span>
-          </h2>
-          <p className="text-muted-foreground text-lg">
-            Tu negocio no es genérico. El ecosistema entiende el contexto de tu ciudad, las zonas de envío y el tono de tus clientes.
-          </p>
-        </div>
-
-        {/* BENTO GRID */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          
-          {/* ==========================================
-              CAJA 1: Radar Logística Barrial (Con Mapa)
-              ========================================== */}
-          <div className="col-span-1 md:col-span-2 bg-black border border-border/50 rounded-3xl overflow-hidden relative group min-h-[320px] flex flex-col justify-end p-6 md:p-8 shadow-lg">
-            {/* Fondo de Mapa */}
-            <div className="absolute inset-0 z-0">
-              <img 
-                src="https://images.unsplash.com/photo-1524661135-423995f22d0b?q=80&w=1200&auto=format&fit=crop" 
-                alt="Mapa logístico" 
-                className="w-full h-full object-cover opacity-50 group-hover:scale-105 transition-transform duration-700 ease-out grayscale"
-              />
-              {/* Overlay oscuro en degradado para garantizar contraste absoluto */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black via-black/80 to-transparent" />
-            </div>
-            
-            <div className="relative z-10">
-              <div className="w-12 h-12 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center mb-4 border border-white/20">
-                <MapPin className="w-6 h-6 text-white" />
-              </div>
-              <h3 className="text-2xl md:text-3xl font-bold mb-3 text-white">Radar de Logística Barrial</h3>
-              <p className="text-white/80 max-w-md text-sm md:text-base leading-relaxed">
-                Entiende perfectamente si el envío es a Nueva Córdoba, Barrio General Paz o las afueras, calculando costos de cadetería y tiempos de entrega reales en segundos.
-              </p>
-            </div>
-          </div>
-
-          {/* ==========================================
-              CAJA 2: Audios Humanos (Animación Colorida)
-              ========================================== */}
-          <div className="col-span-1 bg-secondary/20 border border-border/50 backdrop-blur-sm rounded-3xl p-6 md:p-8 flex flex-col justify-between overflow-hidden relative group shadow-lg">
-            <div>
-              <div className="w-10 h-10 bg-blue-500/10 rounded-full flex items-center justify-center mb-4">
-                <Mic className="w-5 h-5 text-blue-400" />
-              </div>
-              <h3 className="text-xl font-bold mb-2 text-foreground">Audios Humanos en Tiempo Real</h3>
-              <p className="text-sm text-muted-foreground mb-8">
-                Se comunica con la calidez y el acento de tu región. Hiperculturalidad que genera confianza inmediata.
-              </p>
-            </div>
-
-            {/* Animación de Onda de Audio Colorida */}
-            <div className="flex items-center gap-1.5 h-16 w-full justify-center bg-background/50 rounded-2xl p-4 border border-border/50">
-              {[...Array(14)].map((_, i) => (
-                <motion.div
-                  key={i}
-                  animate={{ 
-                    height: ["20%", "100%", "40%", "80%", "30%"],
-                  }}
-                  transition={{ 
-                    duration: 1.5, 
-                    repeat: Infinity, 
-                    repeatType: "mirror",
-                    delay: i * 0.08,
-                    ease: "easeInOut"
-                  }}
-                  className={`w-1.5 rounded-full ${
-                    i % 3 === 0 ? "bg-gradient-to-t from-pink-500 to-rose-400" :
-                    i % 3 === 1 ? "bg-gradient-to-t from-purple-500 to-indigo-400" :
-                    "bg-gradient-to-t from-amber-400 to-orange-500"
-                  }`}
-                />
-              ))}
-            </div>
-          </div>
-
-          {/* ==========================================
-              CAJA 3: Cerebro Probabilístico (Rosa)
-              ========================================== */}
-          <div className="col-span-1 bg-secondary/20 border border-border/50 backdrop-blur-sm rounded-3xl p-6 md:p-8 flex flex-col transition-colors hover:bg-secondary/40 shadow-lg">
-            <div className="w-10 h-10 bg-pink-500/10 rounded-full flex items-center justify-center mb-4 border border-pink-500/20">
-              <Brain className="w-5 h-5 text-pink-400" />
-            </div>
-            <h3 className="text-xl font-bold mb-2 text-foreground">Cerebro Lingüístico</h3>
-            <p className="text-sm text-muted-foreground">
-              Procesa mensajes con errores ortográficos, modismos y notas de voz largas, extrayendo la intención de compra sin fallar.
+        {/* Columna Izquierda: Tarjetas */}
+        <div className="flex flex-col gap-16">
+          <div className="flex flex-col gap-3">
+            <span className="bg-white w-fit px-4 py-1.5 rounded-full text-sm font-semibold text-gray-800 shadow-sm">
+              100% Determinista
+            </span>
+            <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+              Olvidate de los bots que inventan precios o dan respuestas enlatadas. Nuestro sistema sigue reglas comerciales estrictas para cuidar la reputación de tu marca con precisión matemática.
             </p>
           </div>
 
-          {/* ==========================================
-              CAJA 4: Orquestación Continua (Teal/Esmeralda)
-              ========================================== */}
-          <div className="col-span-1 md:col-span-2 bg-secondary/20 border border-border/50 backdrop-blur-sm rounded-3xl p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6 transition-colors hover:bg-secondary/40 shadow-lg">
-            <div className="w-12 h-12 bg-teal-500/10 rounded-full flex items-center justify-center shrink-0 border border-teal-500/20">
-              <Workflow className="w-6 h-6 text-teal-400" />
-            </div>
-            <div>
-              <h3 className="text-2xl font-bold mb-2 text-foreground">Orquestación Humano-IA</h3>
-              <p className="text-sm text-muted-foreground max-w-lg leading-relaxed">
-                Deriva conversaciones complejas a un agente humano de forma silenciosa, manteniendo el historial intacto para que la atención jamás tenga que empezar desde cero.
-              </p>
-            </div>
+          <div className="flex flex-col gap-3">
+            <span className="bg-white w-fit px-4 py-1.5 rounded-full text-sm font-semibold text-gray-800 shadow-sm">
+              Sincronización de Stock
+            </span>
+            <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+              El agente conoce tu inventario en tiempo real. Asesora sobre talles, variantes y disponibilidad exacta leyendo directamente el catálogo público de tu tienda web.
+            </p>
+          </div>
+        </div>
+
+        {/* Columna Central: Canvas 3D Interactivo */}
+        <div className="relative w-full pt-10 flex justify-center items-center">
+           <HumanoidCanvas />
+        </div>
+
+        {/* Columna Derecha: Tarjetas */}
+        <div className="flex flex-col gap-16">
+          <div className="flex flex-col gap-3">
+            <span className="bg-white w-fit px-4 py-1.5 rounded-full text-sm font-semibold text-gray-800 shadow-sm">
+              Ventas a las 4 AM
+            </span>
+            <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+              Capturá a los clientes nocturnos. El sistema atiende, responde objeciones y guía al usuario hacia el checkout cuando el tráfico sigue llegando pero no hay humanos para responder.
+            </p>
           </div>
 
+          <div className="flex flex-col gap-3">
+            <span className="bg-white w-fit px-4 py-1.5 rounded-full text-sm font-semibold text-gray-800 shadow-sm">
+              Empatía Humana
+            </span>
+            <p className="text-gray-600 leading-relaxed text-sm md:text-base">
+              Interacciones naturales y fluidas por WhatsApp. Entiende el contexto y brinda un trato cálido que convierte consultas frías de Instagram en clientes fidelizados.
+            </p>
+          </div>
         </div>
+
       </div>
     </section>
-  )
+  );
 }

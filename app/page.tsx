@@ -6,13 +6,15 @@ import CTASection from "@/components/cta-section"
 import  PricingSection from "@/components/pricing-section"
 import { FAQSection } from "@/components/faq-section"
 import { Footer } from "@/components/footer"
+import Stats from "@/components/stats-section"
 
 export default function Home() {
   return (
     <main className="min-h-screen bg-background selection:bg-[#427AA1]/20">
       <Header />
       <HeroSection />
-      <EmpatiaSection /> {/* Las Bento boxes de hiper-localización */}
+      <InfraestructuraSection />
+      <Stats />
       <CTASection /> {/* Casos de ROI y Widget Interactivo */}
       <PricingSection /> {/* Los precios oscuros y demo inmersiva */}
       <FAQSection /> {/* Preguntas frecuentes */}

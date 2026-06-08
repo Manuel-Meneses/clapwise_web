@@ -1,12 +1,16 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Inter, Geist_Mono, Playfair_Display } from "next/font/google"
+import { Inter, Geist_Mono, Playfair_Display, Manrope} from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 
 const _inter = Inter({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 const _playfair = Playfair_Display({ subsets: ["latin"] })
+const manrope = Manrope({
+  subsets: ['latin'],
+  variable: '--font-manrope', // Esto crea una variable CSS
+});
 
 export const metadata: Metadata = {
   title: "ClapWise - Agencia",

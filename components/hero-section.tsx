@@ -115,7 +115,7 @@ export default function HeroSection() {
             </h1>
 
             <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
-              La infraestructura de IA determinista para E-commerce. <br className="hidden md:block" />
+              Prueba cómo la IA vende tu ropa AHORA. <br className="hidden md:block" />
               <strong className="text-white font-medium">Garantizado: 0% alucinaciones de stock o precios.</strong>
             </p>
 
